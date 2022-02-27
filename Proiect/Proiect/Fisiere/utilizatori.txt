@@ -1,0 +1,6 @@
+﻿Dan Mircea-Aurelian,123456789
+Diaconescu Dragoș,123456789
+Andrei Dobrescu,123456789
+Emil Caprariu,123456789
+Andrei Criste,123456789
+Emanuel Caprariu,123456789
