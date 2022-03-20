@@ -5,41 +5,53 @@
             height: 26px;
         }
         .auto-style2 {
-            width: 494px;
             height: 29px;
         }
         .auto-style3 {
             height: 26px;
-            width: 494px;
-        }
+            }
         .auto-style4 {
             height: 29px;
+        }
+        .input_rounded{
+            border-radius: 25px;
+            border: 0;
+            outline: none;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+        table{
+            background-color: rgba(0, 0, 0, 0.25);
+            border-radius: 25px;
+            height: 100%;
+        }
+        td{
+            text-align: center;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form id="form1" runat="server">
-        <table style="width:100%;">
+        <table>
             <tr>
-                <td id="login_label" class="auto-style4" colspan="2">
+                <td id="login_label">
                     <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="Autentificare"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td id="user_label" class="auto-style2">Utilizator</td>
-                <td class="auto-style4">
-                    <asp:DropDownList ID="DropDownList1" runat="server" Height="16px" Width="201px">
-                    </asp:DropDownList>
+                <td id="user_textbox">
+                    <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Utilizator"></asp:Label>
+                    <asp:TextBox ID="TextBox1" runat="server" Width="190px" CssClass="input_rounded"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td id="password_label" class="auto-style3">Parola</td>
-                <td class="auto-style1">
-                    <asp:TextBox  ID="TextBoxPWD" runat="server" Width="190px" TextMode="Password"></asp:TextBox>
+                <td id="password_textbox">
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Text="Parola"></asp:Label>
+                    <asp:TextBox  ID="TextBoxPWD" runat="server" Width="190px" TextMode="Password" CssClass="input_rounded"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td id="login_button" class="auto-style1" colspan="2">
+                <td id="login_button">
                     <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Autentificare" />
                 </td>
             </tr>
