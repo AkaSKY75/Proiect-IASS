@@ -29,7 +29,6 @@ body {
     width: 100%;
     position: absolute;
     top: 0;
-    overflow-y: auto;
 }
 
 ul{
@@ -70,7 +69,6 @@ li a:hover{
     bottom: 0;
 }
 
-#con{
-    border: double;
-    border-color: burlywood;
+#con {
+    overflow-y: auto;
 }
