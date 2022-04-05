@@ -13,8 +13,9 @@ namespace Proiect
         protected void Page_Load(object sender, EventArgs e)
         {
             //string[] utilizatori = File.ReadAllLines(Server.MapPath("~/Fisiere/") + "utilizatori.txt");
-            //foreach(var line in utilizatori)
+            //foreach (var line in utilizatori)
             //{
+                
             //    string[] inregistrare = line.Split(',');
             //    DropDownList1.Items.Add(inregistrare[0]);
             //}
