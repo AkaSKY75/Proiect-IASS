@@ -26,14 +26,17 @@ namespace GenerareRaportPDF
             };
 
             GeneratePDF pdf = new GeneratePDF(pacient);
-            if (pdf.GenerateFisaMedicala())
-            {
-                Console.WriteLine("Pdf generat cu succes!");
-            }
-            else
-            {
-                Console.WriteLine("Generarea nu a fost cu succes!");
-            }
+            //if (pdf.GenerateFisaMedicala())
+            //{
+            //    Console.WriteLine("Pdf generat cu succes!");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Generarea nu a fost cu succes!");
+            //}
+
+            GenerareXML xml = new GenerareXML(pacient);
+            xml.ScriereXML();
             
         }
     }

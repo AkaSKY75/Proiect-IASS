@@ -190,7 +190,7 @@ namespace GenerareRaportPDF
 
                 //  CONSULTATII, INVESTIGATII tabel ce se genereaza in functie de lista de consultatii
 
-                if(_pacient.Consultatii.Count > 0)
+                if(_pacient.Consultatii.ToList().Count > 0)
                 {
                     Table consultatiiTable = new Table(7, false);
                     consultatiiTable.SetHorizontalAlignment(HorizontalAlignment.CENTER);
