@@ -84,43 +84,42 @@ namespace GenerareRaportPDF
                 document.Add(newline);
                 document.Add(newline);
 
+                int[] datas = _pacient.DataNasterii();
 
                 string repeater = string.Concat(Enumerable.Repeat(".", 15));
-                Paragraph rand1 = new Paragraph($"Numele ")
+                Paragraph rand1 = new Paragraph($"Numele: ")
                  .SetTextAlignment(TextAlignment.LEFT)
                  .SetFontSize(10);
-                rand1.Add($"{repeater} {_pacient.Nume} {repeater}");
-                rand1.Add($"  Prenumele {repeater}{_pacient.Prenume}  {repeater}");
-                rand1.Add($"Sexul {repeater} {_pacient.Sex}");
+                rand1.Add($"{_pacient.Nume} {repeater}");
+                rand1.Add($"Prenumele: {_pacient.Prenume}  {repeater}");
+                rand1.Add($"Sexul: {_pacient.Sex} {repeater}");
                 document.Add(rand1);
 
-
-                int[] datas = _pacient.DataNasterii();
-                
-
+                            
                 Paragraph rand2 = new Paragraph($"Data nasterii: ")
                .SetTextAlignment(TextAlignment.LEFT)
                .SetFontSize(10);
                 rand2.Add($"anul {datas[2]}   {repeater}");
-                rand2.Add($" luna {datas[1]}{repeater} ");
+                rand2.Add($" luna {datas[1]} {repeater} ");
                 rand2.Add($" ziua {datas[0]}  {repeater}.");
-                rand2.Add($"Starea civila {repeater} {_pacient.StareCivila}{repeater}");
+                rand2.Add($"Starea civila:  {_pacient.StareCivila} {repeater}");
                 document.Add(rand2);
 
                 Paragraph rand3 = new Paragraph($"Domiciliul: ")
                .SetTextAlignment(TextAlignment.LEFT)
                .SetFontSize(10);
-                rand3.Add($"localitatea {repeater}{_pacient.DomiciliuLocal} {repeater}");
-                rand3.Add($"  str. {_pacient.Strada}{repeater}");
-                rand3.Add($"  nr. {_pacient.DomiciliuNr} {repeater}");
+                rand3.Add($"localitatea: {_pacient.DomiciliuLocal} {repeater}");
+                rand3.Add($"   str. {_pacient.Strada}{repeater}");
+                rand3.Add($"   nr. {_pacient.DomiciliuNr} {repeater}");
                 document.Add(rand3);
 
-                Paragraph rand4 = new Paragraph($"Ocupatia {repeater} {_pacient.Ocupatie}{repeater}")
+                Paragraph rand4 = new Paragraph($"Ocupatia: {_pacient.Ocupatie}{repeater}")
                .SetTextAlignment(TextAlignment.LEFT)
                .SetFontSize(10);
-                rand4.Add($" Locul de munca {repeater} {_pacient.LocDeMunca}{repeater}");            
+                rand4.Add($" Locul de munca: {_pacient.LocDeMunca}{repeater}");            
                 document.Add(rand4);
 
+                document.Add(newline);
 
                 LineSeparator ls = new LineSeparator(new SolidLine());
                 document.Add(ls);
@@ -142,55 +141,55 @@ namespace GenerareRaportPDF
                 .SetFontSize(10);
                 document.Add(subtitle);
 
-                Paragraph subtitle2 = new Paragraph($"{repeater} {_pacient.SchimbariDomiciliu[0]} {repeater}")
+                Paragraph subtitle2 = new Paragraph($" {_pacient.SchimbariDomiciliu} {repeater}")
                .SetTextAlignment(TextAlignment.LEFT)
                .SetFontSize(10);
 
                 subtitle2.Add(new Tab());
                 subtitle2.AddTabStops(new TabStop(1000, TabAlignment.RIGHT));
-                subtitle2.Add($"{repeater} {_pacient.SchimbariDomiciliu[1]} {repeater}")
+                subtitle2.Add($" {_pacient.SchimbariLocMunca} {repeater}")
                 .SetFontSize(10);
                 document.Add(subtitle2);
 
                 document.Add(ls);
 
-                Paragraph subtitle3 = new Paragraph($"Antecedente:")
+                Paragraph subtitle3 = new Paragraph(new Text($"Antecedente:\n"))
                 .SetTextAlignment(TextAlignment.LEFT)
-                .SetFontSize(10);
+                .SetFontSize(12).SetBold().SetUnderline();
+                document.Add(subtitle3);
 
-                subtitle3.Add($"heredo-colaterale: {repeater} {_pacient.Antecedente[0]} {repeater}")
-                 .SetTextAlignment(TextAlignment.LEFT)
+                subtitle3 = new Paragraph($"Heredo-colaterale: {_pacient.AntecedenteHeredo} {repeater}")
+                .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(10);
                 document.Add(subtitle3);
 
 
-                Paragraph subtitle4 = new Paragraph($"personale: {repeater}{_pacient.Antecedente[1]} {repeater}")
+                Paragraph subtitle4 = new Paragraph($"Personale: {_pacient.AntecedentePersonale} {repeater}")
                .SetTextAlignment(TextAlignment.LEFT)
                .SetFontSize(10);
                 document.Add(subtitle4);
 
-                Paragraph paragraphnull = new Paragraph($"{repeater}{repeater}{repeater}{repeater}{repeater}{repeater}")
-                .SetTextAlignment(TextAlignment.LEFT)
-                .SetFontSize(10);
-                document.Add(paragraphnull);
 
+                document.Add(newline);
 
                 //Conditii de munca:
 
-                Paragraph subtitle5 = new Paragraph($"Conditii de munca:")
-                .SetUnderline()
+                Paragraph subtitle5 = new Paragraph($"Conditii de munca: ")               
                 .SetTextAlignment(TextAlignment.LEFT)
-                .SetFontSize(10);
+                .SetFontSize(12).SetUnderline().SetBold();
+                document.Add(subtitle5);
 
-                subtitle3.Add($"{repeater} {_pacient.ConditiiDeMunca} {repeater}")
-                 .SetTextAlignment(TextAlignment.LEFT)
+                subtitle5 = new Paragraph($" {_pacient.ConditiiDeMunca} {repeater}")
+                .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(10);
                 document.Add(subtitle5);
 
+                document.Add(newline);
+                document.Add(newline);
 
                 //  CONSULTATII, INVESTIGATII tabel ce se genereaza in functie de lista de consultatii
 
-                if(_pacient.Consultatii.ToList().Count > 0)
+                if (_pacient.Consultatii.ToList().Count > 0)
                 {
                     Table consultatiiTable = new Table(7, false);
                     consultatiiTable.SetHorizontalAlignment(HorizontalAlignment.CENTER);
@@ -230,8 +229,6 @@ namespace GenerareRaportPDF
                    .SetBackgroundColor(ColorConstants.WHITE)
                    .SetTextAlignment(TextAlignment.CENTER)
                    .Add(new Paragraph(new Text("Nr.Zile\nConcediu medical;\nNr.Certificat")));
-
-
 
                     consultatiiTable.AddCell(cell1);
                     consultatiiTable.AddCell(cell2);

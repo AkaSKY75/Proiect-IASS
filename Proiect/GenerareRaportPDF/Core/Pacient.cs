@@ -18,10 +18,10 @@ namespace GenerareRaportPDF.Core
         public string LocDeMunca { get; set; }
 
 
-        public string[] SchimbariDomiciliu { get; set; } = new string[2];
-
-        public string[] Antecedente { get; set; } = new string[2];
-
+        public string SchimbariDomiciliu { get; set; }
+        public string SchimbariLocMunca { get; set; }
+        public string AntecedenteHeredo { get; set; }
+        public string AntecedentePersonale { get; set; }
         public string ConditiiDeMunca { get; set; }
 
         //date legate de fisa

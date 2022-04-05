@@ -12,7 +12,7 @@ namespace GenerareRaportPDF
         {
             _pacient = pacient;
         }
-        public void ScriereXML()
+        public void GenerareXMLPacient()
         {
             XmlDocument xml = new XmlDocument();
             //crearea xmlDeclaration
@@ -23,32 +23,53 @@ namespace GenerareRaportPDF
             xml.AppendChild(root);
 
             PropertyInfo[] properties = typeof(Pacient).GetProperties();
-            
+            PropertyInfo[] propertiesConsultatie = typeof(Consultatie).GetProperties();
 
             foreach (var property in properties)
             {
 
                 var isEnumerable = typeof(List<Consultatie>).IsAssignableFrom(property.PropertyType);
-                if (property.PropertyType.IsArray)
-                {
-                    Console.WriteLine($"array : {property.Name}");
-                }
-
                 if (isEnumerable)
                 {
-                    Console.WriteLine($" is Enumerable : Consultatie" );
+                                  
+                    foreach(var item in _pacient.Consultatii)
+                    {
+                        XmlNode tmpNode = xml.CreateNode(XmlNodeType.Element, $"Consultatie", "");
+                        foreach(var prop in propertiesConsultatie)
+                        {
+                            XmlNode consultNode = xml.CreateNode(XmlNodeType.Element, $"{prop.Name}", "");
+                            consultNode.InnerText = item.;
+                            tmpNode.AppendChild(consultNode);
+                        }
+
+                        root.AppendChild(tmpNode);
+                    }
                 }
-                Console.WriteLine(property.Name);
-                //pentru fiecare studenti din listBox
-                //XmlNode tmpNode = xml.CreateNode(XmlNodeType.Element, $"{property.ToString()}", "");
-                //tmpNode.InnerText = properties.GetValue;
-                //root.AppendChild(tmpNode); //adaugarea nodului ca si copil la nodul radacina
+                else
+                {
+
+                    XmlNode tmpNode = xml.CreateNode(XmlNodeType.Element, $"{property.Name}", "");
+                    tmpNode.InnerText = "Marcel";
+                    root.AppendChild(tmpNode); 
+
+                }
+
+
+               
             }
+            Console.WriteLine("S-a generat xml");
             var currentPath = Path.Combine(Directory.GetCurrentDirectory(), "file_output");
-            var xmlFile = Path.Combine(currentPath, "random.xml");
+            var nameXML = _pacient.Nume + "_" + _pacient.Prenume + "_" + DateTime.Now.ToString("dd-MM-yyyy") + ".xml";
+            var xmlFile = Path.Combine(currentPath, nameXML);
+
             xml.Save(xmlFile);
 
             Console.WriteLine("XML generat cu success!");
+        }
+
+        public void GenerareXMLTotiPacientii(List<Pacient> pacienti)
+        {
+
         }
     }
 }

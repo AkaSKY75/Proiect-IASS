@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Pacient nume="Marcel"  >
+  <Nume value="Marcel"/>
+  <Prenume>Marcel</Prenume>
+  <Cnp>Marcel</Cnp>
+  <Sex>Marcel</Sex>
+  <StareCivila>Marcel</StareCivila>
+  <DomiciliuLocal>Marcel</DomiciliuLocal>
+  <Strada>Marcel</Strada>
+  <DomiciliuNr>Marcel</DomiciliuNr>
+  <Ocupatie>Marcel</Ocupatie>
+  <LocDeMunca>Marcel</LocDeMunca>
+  <SchimbariDomiciliu>Marcel</SchimbariDomiciliu>
+  <SchimbariLocMunca>Marcel</SchimbariLocMunca>
+  <AntecedenteHeredo>Marcel</AntecedenteHeredo>
+  <AntecedentePersonale value="asfasfa" >Marcel</AntecedentePersonale>
+  <ConditiiDeMunca>Marcel</ConditiiDeMunca>
+  <Judet>Marcel</Judet>
+  <Localitatea>Marcel</Localitatea>
+  <UnitateSanitara>Marcel</UnitateSanitara>
+  <Consultatie>
+    <Data>2</Data>
+    <Locul>AAfasnfaslfm;i</Locul>
+    <Simptome>asd</Simptome>
+    <Diagnostic>Andrei</Diagnostic>
+    <Cod>Andrei</Cod>
+    <Prescriptie>Andrei</Prescriptie>
+    <NrZileConcediu>Andrei</NrZileConcediu>
+  </Consultatie>
+  <Consultatie>
+    <Data>Andrei</Data>
+    <Locul>Andrei</Locul>
+    <Simptome>Andrei</Simptome>
+    <Diagnostic>Andrei</Diagnostic>
+    <Cod>Andrei</Cod>
+    <Prescriptie>Andrei</Prescriptie>
+    <NrZileConcediu>Andrei</NrZileConcediu>
+  </Consultatie>
+</Pacient>
