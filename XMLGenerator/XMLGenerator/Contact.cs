@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record Contact(CodeableConcept relationship, HumanName name, ContactPoint telecom, Address address, string gender, string organization, Period period);
+    public record Contact(int id, CodeableConcept relationship, HumanName name, ContactPoint telecom, Address address, string gender, string organization, Period period);
 
 
 }

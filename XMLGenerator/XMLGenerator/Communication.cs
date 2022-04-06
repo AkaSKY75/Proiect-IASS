@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record Communication(CodeableConcept language, bool preferred);
+    public record Communication(int id, CodeableConcept language, bool preferred);
 
 
 }

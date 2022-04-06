@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record CodeableConcept(Coding coding, string text);
+    public record CodeableConcept(int id, Coding coding, string text);
 }

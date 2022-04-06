@@ -14,3 +14,19 @@ D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.
 D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\ref\XMLGenerator.dll
 D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.pdb
 D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.genruntimeconfig.cache
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.csproj.AssemblyReference.cache
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.AssemblyInfoInputs.cache
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.AssemblyInfo.cs
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.dll
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.pdb
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.exe
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.deps.json
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.runtimeconfig.json
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.runtimeconfig.dev.json
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.dll
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.pdb
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\refint\XMLGenerator.dll
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.genruntimeconfig.cache
+E:\Anul 4\SEM II\IASS\xml_generator\xml_generator\XMLGenerator\XMLGenerator\obj\Debug\net5.0\ref\XMLGenerator.dll

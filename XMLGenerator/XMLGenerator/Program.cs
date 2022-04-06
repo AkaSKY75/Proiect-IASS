@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -7,797 +8,800 @@ namespace XMLGenerator
 {
     class Program
     {
-        public static void createXml(List<Patient> patientsList)
-        {
-            foreach(Patient patient in patientsList)
-            {
-                // Create XML Document and the root for it
-                XmlDocument xml = new XmlDocument();
-                XmlDeclaration xml_declaration = xml.CreateXmlDeclaration("1.0", "utf-8", "");
-                xml.AppendChild(xml_declaration);
-                XmlNode root = xml.CreateNode(XmlNodeType.Element, "Patient", "");
-                xml.AppendChild(root);
-
-                #region Create identifier TAG
-
-                XmlNode identifier = xml.CreateNode(XmlNodeType.Element, "identifier", "");
-                root.AppendChild(identifier);
-
-                #region Create IDENTIFIER childs TAG
-
-                #region Create USE TAG
-
-                XmlNode use = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useValue = xml.CreateAttribute("value");
-                use.Attributes.Append(useValue);
-                useValue.Value = patient.identifier.use;
-                identifier.AppendChild(use);
-                
-                #endregion
-
-                #region Create TYPE TAG
-
-                XmlNode type = xml.CreateNode(XmlNodeType.Element, "type", "");
-                identifier.AppendChild(type);
-
-                #region Create TYPE(CodeableConcept) childs TAG
-
-                XmlNode coding = xml.CreateNode(XmlNodeType.Element, "coding", "");
-                type.AppendChild(coding);
-
-                #region Create Coding(Coding) childs TAG
-
-                XmlNode system = xml.CreateNode(XmlNodeType.Element, "system", "");
-                XmlAttribute systemValue = xml.CreateAttribute("value");
-                system.Attributes.Append(systemValue);
-                systemValue.Value = patient.identifier.type.coding.system;
-                coding.AppendChild(system);
-                XmlNode version = xml.CreateNode(XmlNodeType.Element, "version", "");
-                XmlAttribute versionValue = xml.CreateAttribute("value");
-                version.Attributes.Append(versionValue);
-                versionValue.Value = patient.identifier.type.coding.version;
-                coding.AppendChild(version);
-                XmlNode code = xml.CreateNode(XmlNodeType.Element, "code", "");
-                XmlAttribute codeValue = xml.CreateAttribute("value");
-                code.Attributes.Append(codeValue);
-                codeValue.Value = patient.identifier.type.coding.code;
-                coding.AppendChild(code);
-                XmlNode display = xml.CreateNode(XmlNodeType.Element, "display", "");
-                XmlAttribute displayValue = xml.CreateAttribute("value");
-                display.Attributes.Append(displayValue);
-                displayValue.Value = patient.identifier.type.coding.display;
-                coding.AppendChild(display);
-                XmlNode userSelected = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
-                XmlAttribute userSelectedValue = xml.CreateAttribute("value");
-                userSelected.Attributes.Append(userSelectedValue);
-                userSelectedValue.Value = patient.identifier.type.coding.userSelected.ToString();
-                coding.AppendChild(userSelected);
-                #endregion
-
-                XmlNode text = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textValue = xml.CreateAttribute("value");
-                text.Attributes.Append(textValue);
-                textValue.Value = patient.identifier.type.text;
-                type.AppendChild(text);
-
-                #endregion
-
-                #endregion
-
-                #region Create SYSTEM TAG
-
-                XmlNode systemS = xml.CreateNode(XmlNodeType.Element, "system", "");
-                XmlAttribute systemSValue = xml.CreateAttribute("value");
-                systemS.Attributes.Append(systemSValue);
-                systemSValue.Value = patient.identifier.system;
-                identifier.AppendChild(systemS);
-
-                #endregion
-
-                #region Create VALUE TAG
-
-                XmlNode value = xml.CreateNode(XmlNodeType.Element, "value", "");
-                XmlAttribute valueValue = xml.CreateAttribute("value");
-                value.Attributes.Append(valueValue);
-                valueValue.Value = patient.identifier.value;
-                identifier.AppendChild(value);
-
-                #endregion
-
-                #region Create PERIOD TAG
-                XmlNode period = xml.CreateNode(XmlNodeType.Element, "period", "");
-                identifier.AppendChild(period);
-
-                #region Create PERIOD childs TAG
+        //public static void createXml(List<Patient> patientsList)
+        //{
+        //    foreach(Patient patient in patientsList)
+        //    {
+        //        // Create XML Document and the root for it
+        //        XmlDocument xml = new XmlDocument();
+        //        XmlDeclaration xml_declaration = xml.CreateXmlDeclaration("1.0", "utf-8", "");
+        //        xml.AppendChild(xml_declaration);
+        //        XmlNode root = xml.CreateNode(XmlNodeType.Element, "Patient", "");
+        //        xml.AppendChild(root);
+
+        //        #region Create identifier TAG
+
+        //        XmlNode identifier = xml.CreateNode(XmlNodeType.Element, "identifier", "");
+        //        root.AppendChild(identifier);
+
+        //        #region Create IDENTIFIER childs TAG
+
+        //        #region Create USE TAG
+
+        //        XmlNode use = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useValue = xml.CreateAttribute("value");
+        //        use.Attributes.Append(useValue);
+        //        useValue.Value = patient.identifier.use;
+        //        identifier.AppendChild(use);
+
+        //        #endregion
+
+        //        #region Create TYPE TAG
+
+        //        XmlNode type = xml.CreateNode(XmlNodeType.Element, "type", "");
+        //        identifier.AppendChild(type);
 
-                XmlNode start = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startValue = xml.CreateAttribute("value");
-                start.Attributes.Append(startValue);
-                startValue.Value = patient.identifier.period.Start.ToString();
-                period.AppendChild(start);
+        //        #region Create TYPE(CodeableConcept) childs TAG
+
+        //        XmlNode coding = xml.CreateNode(XmlNodeType.Element, "coding", "");
+        //        type.AppendChild(coding);
+
+        //        #region Create Coding(Coding) childs TAG
 
-                XmlNode end = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endValue = xml.CreateAttribute("value");
-                end.Attributes.Append(endValue);
-                endValue.Value = patient.identifier.period.End.ToString();
-                period.AppendChild(end);
+        //        XmlNode system = xml.CreateNode(XmlNodeType.Element, "system", "");
+        //        XmlAttribute systemValue = xml.CreateAttribute("value");
+        //        system.Attributes.Append(systemValue);
+        //        systemValue.Value = patient.identifier.type.coding.system;
+        //        coding.AppendChild(system);
+        //        XmlNode version = xml.CreateNode(XmlNodeType.Element, "version", "");
+        //        XmlAttribute versionValue = xml.CreateAttribute("value");
+        //        version.Attributes.Append(versionValue);
+        //        versionValue.Value = patient.identifier.type.coding.version;
+        //        coding.AppendChild(version);
+        //        XmlNode code = xml.CreateNode(XmlNodeType.Element, "code", "");
+        //        XmlAttribute codeValue = xml.CreateAttribute("value");
+        //        code.Attributes.Append(codeValue);
+        //        codeValue.Value = patient.identifier.type.coding.code;
+        //        coding.AppendChild(code);
+        //        XmlNode display = xml.CreateNode(XmlNodeType.Element, "display", "");
+        //        XmlAttribute displayValue = xml.CreateAttribute("value");
+        //        display.Attributes.Append(displayValue);
+        //        displayValue.Value = patient.identifier.type.coding.display;
+        //        coding.AppendChild(display);
+        //        XmlNode userSelected = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
+        //        XmlAttribute userSelectedValue = xml.CreateAttribute("value");
+        //        userSelected.Attributes.Append(userSelectedValue);
+        //        userSelectedValue.Value = patient.identifier.type.coding.userSelected.ToString();
+        //        coding.AppendChild(userSelected);
+        //        #endregion
+
+        //        XmlNode text = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textValue = xml.CreateAttribute("value");
+        //        text.Attributes.Append(textValue);
+        //        textValue.Value = patient.identifier.type.text;
+        //        type.AppendChild(text);
+
+        //        #endregion
+
+        //        #endregion
+
+        //        #region Create SYSTEM TAG
+
+        //        XmlNode systemS = xml.CreateNode(XmlNodeType.Element, "system", "");
+        //        XmlAttribute systemSValue = xml.CreateAttribute("value");
+        //        systemS.Attributes.Append(systemSValue);
+        //        systemSValue.Value = patient.identifier.system;
+        //        identifier.AppendChild(systemS);
+
+        //        #endregion
+
+        //        #region Create VALUE TAG
+
+        //        XmlNode value = xml.CreateNode(XmlNodeType.Element, "value", "");
+        //        XmlAttribute valueValue = xml.CreateAttribute("value");
+        //        value.Attributes.Append(valueValue);
+        //        valueValue.Value = patient.identifier.value;
+        //        identifier.AppendChild(value);
+
+        //        #endregion
+
+        //        #region Create PERIOD TAG
+        //        XmlNode period = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        identifier.AppendChild(period);
+
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode start = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startValue = xml.CreateAttribute("value");
+        //        start.Attributes.Append(startValue);
+        //        startValue.Value = patient.identifier.period.Start.ToString();
+        //        period.AppendChild(start);
 
-                #endregion
+        //        XmlNode end = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endValue = xml.CreateAttribute("value");
+        //        end.Attributes.Append(endValue);
+        //        endValue.Value = patient.identifier.period.End.ToString();
+        //        period.AppendChild(end);
 
-                #region Create ASSIGNER TAG
+        //        #endregion
 
-                XmlNode assigner = xml.CreateNode(XmlNodeType.Element, "assigner", "");
-                identifier.AppendChild(assigner);
+        //        #endregion
 
-                #endregion
+        //        #region Create ASSIGNER TAG
 
-                #endregion
+        //        XmlNode assigner = xml.CreateNode(XmlNodeType.Element, "assigner", "");
+        //        identifier.AppendChild(assigner);
 
-                #endregion
+        //        #endregion
 
-                XmlNode active = xml.CreateNode(XmlNodeType.Element, "active", "");
-                XmlAttribute activeValue = xml.CreateAttribute("value");
-                activeValue.Value = patient.active.ToString();
-                active.Attributes.Append(activeValue);
-                root.AppendChild(active);
+        //        #endregion
 
-                XmlNode name = xml.CreateNode(XmlNodeType.Element, "name", "");
-                root.AppendChild(name);
+        //        #endregion
 
-                #region Create NAME(HUMAN NAME) TAG
+        //        XmlNode active = xml.CreateNode(XmlNodeType.Element, "active", "");
+        //        XmlAttribute activeValue = xml.CreateAttribute("value");
+        //        activeValue.Value = patient.active.ToString();
+        //        active.Attributes.Append(activeValue);
+        //        root.AppendChild(active);
 
-                XmlNode useN = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useNValue = xml.CreateAttribute("value");
-                useN.Attributes.Append(useNValue);
-                useNValue.Value = patient.name.use;
-                name.AppendChild(useN);
+        //        XmlNode name = xml.CreateNode(XmlNodeType.Element, "name", "");
+        //        root.AppendChild(name);
 
-                XmlNode textN = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textNValue = xml.CreateAttribute("value");
-                textN.Attributes.Append(textNValue);
-                textNValue.Value = patient.name.text;
-                name.AppendChild(textN);
+        //        #region Create NAME(HUMAN NAME) TAG
 
-                XmlNode family = xml.CreateNode(XmlNodeType.Element, "family", "");
-                XmlAttribute familyValue = xml.CreateAttribute("value");
-                family.Attributes.Append(familyValue);
-                familyValue.Value = patient.name.family;
-                name.AppendChild(family);
+        //        XmlNode useN = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useNValue = xml.CreateAttribute("value");
+        //        useN.Attributes.Append(useNValue);
+        //        useNValue.Value = patient.name.use;
+        //        name.AppendChild(useN);
 
-                XmlNode given = xml.CreateNode(XmlNodeType.Element, "given", "");
-                XmlAttribute givenValue = xml.CreateAttribute("value");
-                given.Attributes.Append(givenValue);
-                givenValue.Value = patient.name.given;
-                name.AppendChild(given);
+        //        XmlNode textN = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textNValue = xml.CreateAttribute("value");
+        //        textN.Attributes.Append(textNValue);
+        //        textNValue.Value = patient.name.text;
+        //        name.AppendChild(textN);
 
-                XmlNode prefix = xml.CreateNode(XmlNodeType.Element, "prefix", "");
-                XmlAttribute prefixValue = xml.CreateAttribute("value");
-                prefix.Attributes.Append(prefixValue);
-                prefixValue.Value = patient.name.prefix;
-                name.AppendChild(prefix);
+        //        XmlNode family = xml.CreateNode(XmlNodeType.Element, "family", "");
+        //        XmlAttribute familyValue = xml.CreateAttribute("value");
+        //        family.Attributes.Append(familyValue);
+        //        familyValue.Value = patient.name.family;
+        //        name.AppendChild(family);
 
-                XmlNode suffix = xml.CreateNode(XmlNodeType.Element, "suffix", "");
-                XmlAttribute suffixValue = xml.CreateAttribute("value");
-                suffix.Attributes.Append(suffixValue);
-                suffixValue.Value = patient.name.suffix;
-                name.AppendChild(suffix);
+        //        XmlNode given = xml.CreateNode(XmlNodeType.Element, "given", "");
+        //        XmlAttribute givenValue = xml.CreateAttribute("value");
+        //        given.Attributes.Append(givenValue);
+        //        givenValue.Value = patient.name.given;
+        //        name.AppendChild(given);
 
-                #region Create PERIOD TAG
-                XmlNode periodN = xml.CreateNode(XmlNodeType.Element, "period", "");
-                name.AppendChild(periodN);
+        //        XmlNode prefix = xml.CreateNode(XmlNodeType.Element, "prefix", "");
+        //        XmlAttribute prefixValue = xml.CreateAttribute("value");
+        //        prefix.Attributes.Append(prefixValue);
+        //        prefixValue.Value = patient.name.prefix;
+        //        name.AppendChild(prefix);
 
-                #region Create PERIOD childs TAG
+        //        XmlNode suffix = xml.CreateNode(XmlNodeType.Element, "suffix", "");
+        //        XmlAttribute suffixValue = xml.CreateAttribute("value");
+        //        suffix.Attributes.Append(suffixValue);
+        //        suffixValue.Value = patient.name.suffix;
+        //        name.AppendChild(suffix);
 
-                XmlNode startN = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startNValue = xml.CreateAttribute("value");
-                startN.Attributes.Append(startNValue);
-                startNValue.Value = patient.name.period.Start.ToString();
-                periodN.AppendChild(startN);
+        //        #region Create PERIOD TAG
+        //        XmlNode periodN = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        name.AppendChild(periodN);
 
-                XmlNode endN = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endNalue = xml.CreateAttribute("value");
-                endN.Attributes.Append(endNalue);
-                endNalue.Value = patient.name.period.End.ToString();
-                periodN.AppendChild(endN);
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode startN = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startNValue = xml.CreateAttribute("value");
+        //        startN.Attributes.Append(startNValue);
+        //        startNValue.Value = patient.name.period.Start.ToString();
+        //        periodN.AppendChild(startN);
 
-                #endregion
+        //        XmlNode endN = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endNalue = xml.CreateAttribute("value");
+        //        endN.Attributes.Append(endNalue);
+        //        endNalue.Value = patient.name.period.End.ToString();
+        //        periodN.AppendChild(endN);
 
+        //        #endregion
 
-                #endregion
+        //        #endregion
 
-                #region Create TELECOM TAG
 
-                XmlNode telecom = xml.CreateNode(XmlNodeType.Element, "telecom", "");
-                root.AppendChild(telecom);
+        //        #endregion
 
-                #region Create TELECOM(CONTACT POINT) childs TAG
+        //        #region Create TELECOM TAG
 
-                XmlNode systemT = xml.CreateNode(XmlNodeType.Element, "system", "");
-                XmlAttribute systemTValue = xml.CreateAttribute("value");
-                systemT.Attributes.Append(systemTValue);
-                systemTValue.Value = patient.telecom.system;
-                telecom.AppendChild(systemT);
+        //        XmlNode telecom = xml.CreateNode(XmlNodeType.Element, "telecom", "");
+        //        root.AppendChild(telecom);
 
-                XmlNode valueT = xml.CreateNode(XmlNodeType.Element, "value", "");
-                XmlAttribute valueTValue = xml.CreateAttribute("value");
-                valueT.Attributes.Append(valueTValue);
-                valueTValue.Value = patient.telecom.value;
-                telecom.AppendChild(valueT);
+        //        #region Create TELECOM(CONTACT POINT) childs TAG
 
-                XmlNode useT = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useTValue = xml.CreateAttribute("value");
-                useT.Attributes.Append(useTValue);
-                useTValue.Value = patient.telecom.use;
-                telecom.AppendChild(useT);
+        //        XmlNode systemT = xml.CreateNode(XmlNodeType.Element, "system", "");
+        //        XmlAttribute systemTValue = xml.CreateAttribute("value");
+        //        systemT.Attributes.Append(systemTValue);
+        //        systemTValue.Value = patient.telecom.system;
+        //        telecom.AppendChild(systemT);
 
-                XmlNode rankT = xml.CreateNode(XmlNodeType.Element, "rank", "");
-                XmlAttribute rankTValue = xml.CreateAttribute("value");
-                rankT.Attributes.Append(rankTValue);
-                rankTValue.Value = patient.telecom.rank.ToString();
-                telecom.AppendChild(rankT);
+        //        XmlNode valueT = xml.CreateNode(XmlNodeType.Element, "value", "");
+        //        XmlAttribute valueTValue = xml.CreateAttribute("value");
+        //        valueT.Attributes.Append(valueTValue);
+        //        valueTValue.Value = patient.telecom.value;
+        //        telecom.AppendChild(valueT);
 
-                #region Create PERIOD TAG
+        //        XmlNode useT = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useTValue = xml.CreateAttribute("value");
+        //        useT.Attributes.Append(useTValue);
+        //        useTValue.Value = patient.telecom.use;
+        //        telecom.AppendChild(useT);
 
-                XmlNode periodT = xml.CreateNode(XmlNodeType.Element, "period", "");
-                telecom.AppendChild(periodT);
+        //        XmlNode rankT = xml.CreateNode(XmlNodeType.Element, "rank", "");
+        //        XmlAttribute rankTValue = xml.CreateAttribute("value");
+        //        rankT.Attributes.Append(rankTValue);
+        //        rankTValue.Value = patient.telecom.rank.ToString();
+        //        telecom.AppendChild(rankT);
 
-                #region Create PERIOD childs TAG
+        //        #region Create PERIOD TAG
 
-                XmlNode startT = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startTValue = xml.CreateAttribute("value");
-                startT.Attributes.Append(startTValue);
-                startTValue.Value = patient.telecom.period.Start.ToString();
-                periodT.AppendChild(startT);
+        //        XmlNode periodT = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        telecom.AppendChild(periodT);
 
-                XmlNode endT = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endTValue = xml.CreateAttribute("value");
-                endT.Attributes.Append(endTValue);
-                endTValue.Value = patient.telecom.period.End.ToString();
-                periodT.AppendChild(endT);
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode startT = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startTValue = xml.CreateAttribute("value");
+        //        startT.Attributes.Append(startTValue);
+        //        startTValue.Value = patient.telecom.period.Start.ToString();
+        //        periodT.AppendChild(startT);
 
-                #endregion
+        //        XmlNode endT = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endTValue = xml.CreateAttribute("value");
+        //        endT.Attributes.Append(endTValue);
+        //        endTValue.Value = patient.telecom.period.End.ToString();
+        //        periodT.AppendChild(endT);
 
-                #endregion
+        //        #endregion
 
-                #endregion
+        //        #endregion
 
-                #region Create GENDER TAG 
+        //        #endregion
 
-                XmlNode gender = xml.CreateNode(XmlNodeType.Element, "gender", "");
-                XmlAttribute genderValue = xml.CreateAttribute("value");
-                genderValue.Value = patient.gender;
-                gender.Attributes.Append(genderValue);
-                root.AppendChild(gender);
+        //        #endregion
 
-                #endregion
+        //        #region Create GENDER TAG 
 
-                #region Create BIRTHDATE TAG
+        //        XmlNode gender = xml.CreateNode(XmlNodeType.Element, "gender", "");
+        //        XmlAttribute genderValue = xml.CreateAttribute("value");
+        //        genderValue.Value = patient.gender;
+        //        gender.Attributes.Append(genderValue);
+        //        root.AppendChild(gender);
 
-                XmlNode birthDate = xml.CreateNode(XmlNodeType.Element, "birthDate", "");
-                XmlAttribute birthDateValue = xml.CreateAttribute("value");
-                birthDateValue.Value = patient.birthdate.ToString();
-                birthDate.Attributes.Append(birthDateValue);
-                root.AppendChild(birthDate);
+        //        #endregion
 
-                #endregion
+        //        #region Create BIRTHDATE TAG
 
-                #region Create DECEASED TAG
+        //        XmlNode birthDate = xml.CreateNode(XmlNodeType.Element, "birthDate", "");
+        //        XmlAttribute birthDateValue = xml.CreateAttribute("value");
+        //        birthDateValue.Value = patient.birthdate.ToString();
+        //        birthDate.Attributes.Append(birthDateValue);
+        //        root.AppendChild(birthDate);
 
-                XmlNode deceased = xml.CreateNode(XmlNodeType.Element, "deceased", "");
-                XmlAttribute deceasedValue = xml.CreateAttribute("value");
-                deceasedValue.Value = patient.deceased;
-                deceased.Attributes.Append(deceasedValue);
-                root.AppendChild(deceased);
+        //        #endregion
 
-                #endregion
+        //        #region Create DECEASED TAG
 
-                #region Create ADDRESS TAG
+        //        XmlNode deceased = xml.CreateNode(XmlNodeType.Element, "deceased", "");
+        //        XmlAttribute deceasedValue = xml.CreateAttribute("value");
+        //        deceasedValue.Value = patient.deceased;
+        //        deceased.Attributes.Append(deceasedValue);
+        //        root.AppendChild(deceased);
 
-                XmlNode address = xml.CreateNode(XmlNodeType.Element, "address", "");
-                root.AppendChild(address);
+        //        #endregion
 
-                #region Create ADDRESS childs TAG
+        //        #region Create ADDRESS TAG
 
-                XmlNode useA = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useAValue = xml.CreateAttribute("value");
-                useA.Attributes.Append(useAValue);
-                useAValue.Value = patient.address.Use;
-                address.AppendChild(useA);
+        //        XmlNode address = xml.CreateNode(XmlNodeType.Element, "address", "");
+        //        root.AppendChild(address);
 
-                XmlNode typeA = xml.CreateNode(XmlNodeType.Element, "type", "");
-                XmlAttribute typeAValue = xml.CreateAttribute("value");
-                typeA.Attributes.Append(typeAValue);
-                typeAValue.Value = patient.address.Type;
-                address.AppendChild(typeA);
+        //        #region Create ADDRESS childs TAG
 
-                XmlNode textA = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textAValue = xml.CreateAttribute("value");
-                textA.Attributes.Append(textAValue);
-                textAValue.Value = patient.address.Text;
-                address.AppendChild(textA);
+        //        XmlNode useA = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useAValue = xml.CreateAttribute("value");
+        //        useA.Attributes.Append(useAValue);
+        //        useAValue.Value = patient.address.Use;
+        //        address.AppendChild(useA);
 
-                XmlNode line = xml.CreateNode(XmlNodeType.Element, "line", "");
-                XmlAttribute lineValue = xml.CreateAttribute("value");
-                line.Attributes.Append(lineValue);
-                lineValue.Value = patient.address.Line;
-                address.AppendChild(line);
+        //        XmlNode typeA = xml.CreateNode(XmlNodeType.Element, "type", "");
+        //        XmlAttribute typeAValue = xml.CreateAttribute("value");
+        //        typeA.Attributes.Append(typeAValue);
+        //        typeAValue.Value = patient.address.Type;
+        //        address.AppendChild(typeA);
 
-                XmlNode city = xml.CreateNode(XmlNodeType.Element, "city", "");
-                XmlAttribute cityValue = xml.CreateAttribute("value");
-                city.Attributes.Append(cityValue);
-                cityValue.Value = patient.address.City;
-                address.AppendChild(city);
+        //        XmlNode textA = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textAValue = xml.CreateAttribute("value");
+        //        textA.Attributes.Append(textAValue);
+        //        textAValue.Value = patient.address.Text;
+        //        address.AppendChild(textA);
 
-                XmlNode district = xml.CreateNode(XmlNodeType.Element, "district", "");
-                XmlAttribute districtValue = xml.CreateAttribute("value");
-                district.Attributes.Append(districtValue);
-                districtValue.Value = patient.address.District;
-                address.AppendChild(district);
+        //        XmlNode line = xml.CreateNode(XmlNodeType.Element, "line", "");
+        //        XmlAttribute lineValue = xml.CreateAttribute("value");
+        //        line.Attributes.Append(lineValue);
+        //        lineValue.Value = patient.address.Line;
+        //        address.AppendChild(line);
 
-                XmlNode state = xml.CreateNode(XmlNodeType.Element, "state", "");
-                XmlAttribute stateValue = xml.CreateAttribute("value");
-                state.Attributes.Append(stateValue);
-                stateValue.Value = patient.address.State;
-                address.AppendChild(state);
+        //        XmlNode city = xml.CreateNode(XmlNodeType.Element, "city", "");
+        //        XmlAttribute cityValue = xml.CreateAttribute("value");
+        //        city.Attributes.Append(cityValue);
+        //        cityValue.Value = patient.address.City;
+        //        address.AppendChild(city);
 
-                XmlNode postalCode = xml.CreateNode(XmlNodeType.Element, "postalCode", "");
-                XmlAttribute postalCodeValue = xml.CreateAttribute("value");
-                postalCode.Attributes.Append(postalCodeValue);
-                postalCodeValue.Value = patient.address.PostalCode;
-                address.AppendChild(postalCode);
+        //        XmlNode district = xml.CreateNode(XmlNodeType.Element, "district", "");
+        //        XmlAttribute districtValue = xml.CreateAttribute("value");
+        //        district.Attributes.Append(districtValue);
+        //        districtValue.Value = patient.address.District;
+        //        address.AppendChild(district);
 
-                XmlNode country = xml.CreateNode(XmlNodeType.Element, "country", "");
-                XmlAttribute countryValue = xml.CreateAttribute("value");
-                country.Attributes.Append(countryValue);
-                countryValue.Value = patient.address.Country;
-                address.AppendChild(country);
+        //        XmlNode state = xml.CreateNode(XmlNodeType.Element, "state", "");
+        //        XmlAttribute stateValue = xml.CreateAttribute("value");
+        //        state.Attributes.Append(stateValue);
+        //        stateValue.Value = patient.address.State;
+        //        address.AppendChild(state);
 
-                #region Create PERIOD TAG
+        //        XmlNode postalCode = xml.CreateNode(XmlNodeType.Element, "postalCode", "");
+        //        XmlAttribute postalCodeValue = xml.CreateAttribute("value");
+        //        postalCode.Attributes.Append(postalCodeValue);
+        //        postalCodeValue.Value = patient.address.PostalCode;
+        //        address.AppendChild(postalCode);
 
-                XmlNode periodA = xml.CreateNode(XmlNodeType.Element, "period", "");
-                address.AppendChild(periodA);
+        //        XmlNode country = xml.CreateNode(XmlNodeType.Element, "country", "");
+        //        XmlAttribute countryValue = xml.CreateAttribute("value");
+        //        country.Attributes.Append(countryValue);
+        //        countryValue.Value = patient.address.Country;
+        //        address.AppendChild(country);
 
-                #region Create PERIOD childs TAG
+        //        #region Create PERIOD TAG
 
-                XmlNode startA = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startAValue = xml.CreateAttribute("value");
-                startT.Attributes.Append(startAValue);
-                startTValue.Value = patient.address.Period.Start.ToString();
-                periodA.AppendChild(startA);
+        //        XmlNode periodA = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        address.AppendChild(periodA);
 
-                XmlNode endA = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endAValue = xml.CreateAttribute("value");
-                endA.Attributes.Append(endAValue);
-                endAValue.Value = patient.address.Period.End.ToString();
-                periodA.AppendChild(endA);
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode startA = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startAValue = xml.CreateAttribute("value");
+        //        startT.Attributes.Append(startAValue);
+        //        startTValue.Value = patient.address.Period.Start.ToString();
+        //        periodA.AppendChild(startA);
 
-                #endregion
+        //        XmlNode endA = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endAValue = xml.CreateAttribute("value");
+        //        endA.Attributes.Append(endAValue);
+        //        endAValue.Value = patient.address.Period.End.ToString();
+        //        periodA.AppendChild(endA);
 
+        //        #endregion
 
-                #endregion
+        //        #endregion
 
-                #endregion
 
-                #region Create MARITALSTATUS TAG
+        //        #endregion
 
-                XmlNode marital = xml.CreateNode(XmlNodeType.Element, "maritalStatus", "");
-                root.AppendChild(marital);
+        //        #endregion
 
-                #region Create MARITAL(CodeableConcept) childs TAG
+        //        #region Create MARITALSTATUS TAG
 
-                XmlNode codingM = xml.CreateNode(XmlNodeType.Element, "coding", "");
-                marital.AppendChild(codingM);
+        //        XmlNode marital = xml.CreateNode(XmlNodeType.Element, "maritalStatus", "");
+        //        root.AppendChild(marital);
 
-                #region Create Coding(Coding) childs TAG
+        //        #region Create MARITAL(CodeableConcept) childs TAG
 
-                XmlNode systemM = xml.CreateNode(XmlNodeType.Element, "system", "");
-                XmlAttribute systemMValue = xml.CreateAttribute("value");
-                systemM.Attributes.Append(systemMValue);
-                systemMValue.Value = patient.martialStatus.coding.system;
-                codingM.AppendChild(systemM);
+        //        XmlNode codingM = xml.CreateNode(XmlNodeType.Element, "coding", "");
+        //        marital.AppendChild(codingM);
 
-                XmlNode versionM = xml.CreateNode(XmlNodeType.Element, "version", "");
-                XmlAttribute versionMValue = xml.CreateAttribute("value");
-                versionM.Attributes.Append(versionMValue);
-                versionMValue.Value = patient.martialStatus.coding.version;
-                codingM.AppendChild(versionM);
+        //        #region Create Coding(Coding) childs TAG
 
-                XmlNode codeM = xml.CreateNode(XmlNodeType.Element, "code", "");
-                XmlAttribute codeMValue = xml.CreateAttribute("value");
-                codeM.Attributes.Append(codeMValue);
-                codeMValue.Value = patient.martialStatus.coding.code;
-                codingM.AppendChild(codeM);
+        //        XmlNode systemM = xml.CreateNode(XmlNodeType.Element, "system", "");
+        //        XmlAttribute systemMValue = xml.CreateAttribute("value");
+        //        systemM.Attributes.Append(systemMValue);
+        //        systemMValue.Value = patient.martialStatus.coding.system;
+        //        codingM.AppendChild(systemM);
 
-                XmlNode displayM = xml.CreateNode(XmlNodeType.Element, "display", "");
-                XmlAttribute displayMValue = xml.CreateAttribute("value");
-                displayM.Attributes.Append(displayMValue);
-                displayMValue.Value = patient.martialStatus.coding.display;
-                codingM.AppendChild(displayM);
+        //        XmlNode versionM = xml.CreateNode(XmlNodeType.Element, "version", "");
+        //        XmlAttribute versionMValue = xml.CreateAttribute("value");
+        //        versionM.Attributes.Append(versionMValue);
+        //        versionMValue.Value = patient.martialStatus.coding.version;
+        //        codingM.AppendChild(versionM);
 
-                XmlNode userSelectedM = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
-                XmlAttribute userSelectedMValue = xml.CreateAttribute("value");
-                userSelectedM.Attributes.Append(userSelectedMValue);
-                userSelectedMValue.Value = patient.martialStatus.coding.userSelected.ToString();
-                codingM.AppendChild(userSelectedM);
+        //        XmlNode codeM = xml.CreateNode(XmlNodeType.Element, "code", "");
+        //        XmlAttribute codeMValue = xml.CreateAttribute("value");
+        //        codeM.Attributes.Append(codeMValue);
+        //        codeMValue.Value = patient.martialStatus.coding.code;
+        //        codingM.AppendChild(codeM);
 
-                #endregion
+        //        XmlNode displayM = xml.CreateNode(XmlNodeType.Element, "display", "");
+        //        XmlAttribute displayMValue = xml.CreateAttribute("value");
+        //        displayM.Attributes.Append(displayMValue);
+        //        displayMValue.Value = patient.martialStatus.coding.display;
+        //        codingM.AppendChild(displayM);
 
-                XmlNode textM = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textMValue = xml.CreateAttribute("value");
-                textM.Attributes.Append(textMValue);
-                textMValue.Value = patient.martialStatus.text;
-                marital.AppendChild(textM);
+        //        XmlNode userSelectedM = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
+        //        XmlAttribute userSelectedMValue = xml.CreateAttribute("value");
+        //        userSelectedM.Attributes.Append(userSelectedMValue);
+        //        userSelectedMValue.Value = patient.martialStatus.coding.userSelected.ToString();
+        //        codingM.AppendChild(userSelectedM);
 
-                #endregion
+        //        #endregion
 
-                #endregion
+        //        XmlNode textM = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textMValue = xml.CreateAttribute("value");
+        //        textM.Attributes.Append(textMValue);
+        //        textMValue.Value = patient.martialStatus.text;
+        //        marital.AppendChild(textM);
 
-                #region Create MULTIPLEBIRTH TAG
+        //        #endregion
 
-                XmlNode multipleBirth = xml.CreateNode(XmlNodeType.Element, "multipleBirth", "");
-                XmlAttribute multipleBirthValue = xml.CreateAttribute("value");
-                multipleBirthValue.Value = patient.multipleBirth.ToString();
-                multipleBirth.Attributes.Append(multipleBirthValue);
-                root.AppendChild(multipleBirth);
+        //        #endregion
 
-                #endregion
+        //        #region Create MULTIPLEBIRTH TAG
 
-                #region Create PHOTO TAG
+        //        XmlNode multipleBirth = xml.CreateNode(XmlNodeType.Element, "multipleBirth", "");
+        //        XmlAttribute multipleBirthValue = xml.CreateAttribute("value");
+        //        multipleBirthValue.Value = patient.multipleBirth.ToString();
+        //        multipleBirth.Attributes.Append(multipleBirthValue);
+        //        root.AppendChild(multipleBirth);
 
-                XmlNode photo = xml.CreateNode(XmlNodeType.Element, "photo", "");               
-                root.AppendChild(photo);
+        //        #endregion
 
-                XmlNode contentType = xml.CreateNode(XmlNodeType.Element, "contentType", "");
-                XmlAttribute contentTypeValue = xml.CreateAttribute("value");
-                contentTypeValue.Value = patient.photo.contentType;
-                contentType.Attributes.Append(contentTypeValue);
-                photo.AppendChild(contentType);
+        //        #region Create PHOTO TAG
 
-                XmlNode language = xml.CreateNode(XmlNodeType.Element, "language", "");
-                XmlAttribute languageValue = xml.CreateAttribute("value");
-                languageValue.Value = patient.photo.language;
-                language.Attributes.Append(languageValue);
-                photo.AppendChild(language);
+        //        XmlNode photo = xml.CreateNode(XmlNodeType.Element, "photo", "");               
+        //        root.AppendChild(photo);
 
-                XmlNode data = xml.CreateNode(XmlNodeType.Element, "data", "");
-                XmlAttribute dataValue = xml.CreateAttribute("value");
-                dataValue.Value = new string(patient.photo.data);
-                data.Attributes.Append(dataValue);
-                photo.AppendChild(data);
+        //        XmlNode contentType = xml.CreateNode(XmlNodeType.Element, "contentType", "");
+        //        XmlAttribute contentTypeValue = xml.CreateAttribute("value");
+        //        contentTypeValue.Value = patient.photo.contentType;
+        //        contentType.Attributes.Append(contentTypeValue);
+        //        photo.AppendChild(contentType);
 
-                XmlNode url = xml.CreateNode(XmlNodeType.Element, "url", "");
-                XmlAttribute urlValue = xml.CreateAttribute("value");
-                urlValue.Value = patient.photo.url;
-                url.Attributes.Append(urlValue);
-                photo.AppendChild(url);
+        //        XmlNode language = xml.CreateNode(XmlNodeType.Element, "language", "");
+        //        XmlAttribute languageValue = xml.CreateAttribute("value");
+        //        languageValue.Value = patient.photo.language;
+        //        language.Attributes.Append(languageValue);
+        //        photo.AppendChild(language);
 
-                XmlNode size = xml.CreateNode(XmlNodeType.Element, "size", "");
-                XmlAttribute sizeValue = xml.CreateAttribute("value");
-                sizeValue.Value = patient.photo.size.ToString();
-                size.Attributes.Append(sizeValue);
-                photo.AppendChild(size);
+        //        XmlNode data = xml.CreateNode(XmlNodeType.Element, "data", "");
+        //        XmlAttribute dataValue = xml.CreateAttribute("value");
+        //        dataValue.Value = new string(patient.photo.data);
+        //        data.Attributes.Append(dataValue);
+        //        photo.AppendChild(data);
 
-                XmlNode hash = xml.CreateNode(XmlNodeType.Element, "hash", "");
-                XmlAttribute hashValue = xml.CreateAttribute("value");
-                hashValue.Value = new string(patient.photo.hash);
-                hash.Attributes.Append(hashValue);
-                photo.AppendChild(hash);
+        //        XmlNode url = xml.CreateNode(XmlNodeType.Element, "url", "");
+        //        XmlAttribute urlValue = xml.CreateAttribute("value");
+        //        urlValue.Value = patient.photo.url;
+        //        url.Attributes.Append(urlValue);
+        //        photo.AppendChild(url);
 
-                XmlNode title = xml.CreateNode(XmlNodeType.Element, "title", "");
-                XmlAttribute titleValue = xml.CreateAttribute("value");
-                titleValue.Value = patient.photo.title;
-                title.Attributes.Append(titleValue);
-                photo.AppendChild(title);
+        //        XmlNode size = xml.CreateNode(XmlNodeType.Element, "size", "");
+        //        XmlAttribute sizeValue = xml.CreateAttribute("value");
+        //        sizeValue.Value = patient.photo.size.ToString();
+        //        size.Attributes.Append(sizeValue);
+        //        photo.AppendChild(size);
 
-                XmlNode creation = xml.CreateNode(XmlNodeType.Element, "creation", "");
-                XmlAttribute creationValue = xml.CreateAttribute("value");
-                creationValue.Value = patient.photo.creation.ToString();
-                creation.Attributes.Append(creationValue);
-                photo.AppendChild(creation);
+        //        XmlNode hash = xml.CreateNode(XmlNodeType.Element, "hash", "");
+        //        XmlAttribute hashValue = xml.CreateAttribute("value");
+        //        hashValue.Value = new string(patient.photo.hash);
+        //        hash.Attributes.Append(hashValue);
+        //        photo.AppendChild(hash);
 
-                #endregion
-
-                #region Create Contact TAG
+        //        XmlNode title = xml.CreateNode(XmlNodeType.Element, "title", "");
+        //        XmlAttribute titleValue = xml.CreateAttribute("value");
+        //        titleValue.Value = patient.photo.title;
+        //        title.Attributes.Append(titleValue);
+        //        photo.AppendChild(title);
 
-                XmlNode contact = xml.CreateNode(XmlNodeType.Element, "contact", "");
-                root.AppendChild(contact);
+        //        XmlNode creation = xml.CreateNode(XmlNodeType.Element, "creation", "");
+        //        XmlAttribute creationValue = xml.CreateAttribute("value");
+        //        creationValue.Value = patient.photo.creation.ToString();
+        //        creation.Attributes.Append(creationValue);
+        //        photo.AppendChild(creation);
 
-                XmlNode relationship = xml.CreateNode(XmlNodeType.Element, "relationship", "");
-                contact.AppendChild(relationship);
-
-                #region Create RELATIONSHIP(CodeableConcept) childs TAG
+        //        #endregion
+
+        //        #region Create Contact TAG
 
-                XmlNode codingR = xml.CreateNode(XmlNodeType.Element, "coding", "");
-                relationship.AppendChild(codingR);
-
-                #region Create Coding(Coding) childs TAG
+        //        XmlNode contact = xml.CreateNode(XmlNodeType.Element, "contact", "");
+        //        root.AppendChild(contact);
 
-                XmlNode systemR = xml.CreateNode(XmlNodeType.Element, "system", "");
-                XmlAttribute systemRValue = xml.CreateAttribute("value");
-                systemR.Attributes.Append(systemRValue);
-                systemRValue.Value = patient.contact.relationship.coding.system;
-                codingR.AppendChild(systemR);
+        //        XmlNode relationship = xml.CreateNode(XmlNodeType.Element, "relationship", "");
+        //        contact.AppendChild(relationship);
+
+        //        #region Create RELATIONSHIP(CodeableConcept) childs TAG
 
-                XmlNode versionR = xml.CreateNode(XmlNodeType.Element, "version", "");
-                XmlAttribute versionRValue = xml.CreateAttribute("value");
-                versionR.Attributes.Append(versionRValue);
-                versionRValue.Value = patient.contact.relationship.coding.version;
-                codingR.AppendChild(versionR);
+        //        XmlNode codingR = xml.CreateNode(XmlNodeType.Element, "coding", "");
+        //        relationship.AppendChild(codingR);
+
+        //        #region Create Coding(Coding) childs TAG
 
-                XmlNode codeR = xml.CreateNode(XmlNodeType.Element, "code", "");
-                XmlAttribute codeRValue = xml.CreateAttribute("value");
-                codeR.Attributes.Append(codeRValue);
-                codeRValue.Value = patient.contact.relationship.coding.code;
-                codingR.AppendChild(codeR);
+        //        XmlNode systemR = xml.CreateNode(XmlNodeType.Element, "system", "");
+        //        XmlAttribute systemRValue = xml.CreateAttribute("value");
+        //        systemR.Attributes.Append(systemRValue);
+        //        systemRValue.Value = patient.contact.relationship.coding.system;
+        //        codingR.AppendChild(systemR);
 
-                XmlNode displayR = xml.CreateNode(XmlNodeType.Element, "display", "");
-                XmlAttribute displayRValue = xml.CreateAttribute("value");
-                displayR.Attributes.Append(displayRValue);
-                displayRValue.Value = patient.contact.relationship.coding.display;
-                codingR.AppendChild(displayR);
+        //        XmlNode versionR = xml.CreateNode(XmlNodeType.Element, "version", "");
+        //        XmlAttribute versionRValue = xml.CreateAttribute("value");
+        //        versionR.Attributes.Append(versionRValue);
+        //        versionRValue.Value = patient.contact.relationship.coding.version;
+        //        codingR.AppendChild(versionR);
 
-                XmlNode userSelectedR = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
-                XmlAttribute userSelectedRValue = xml.CreateAttribute("value");
-                userSelectedR.Attributes.Append(userSelectedRValue);
-                userSelectedRValue.Value = patient.contact.relationship.coding.userSelected.ToString();
-                codingR.AppendChild(userSelectedR);
-                #endregion
+        //        XmlNode codeR = xml.CreateNode(XmlNodeType.Element, "code", "");
+        //        XmlAttribute codeRValue = xml.CreateAttribute("value");
+        //        codeR.Attributes.Append(codeRValue);
+        //        codeRValue.Value = patient.contact.relationship.coding.code;
+        //        codingR.AppendChild(codeR);
 
-                XmlNode textR = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textRValue = xml.CreateAttribute("value");
-                textR.Attributes.Append(textRValue);
-                textRValue.Value = patient.contact.relationship.text;
-                relationship.AppendChild(textR);
+        //        XmlNode displayR = xml.CreateNode(XmlNodeType.Element, "display", "");
+        //        XmlAttribute displayRValue = xml.CreateAttribute("value");
+        //        displayR.Attributes.Append(displayRValue);
+        //        displayRValue.Value = patient.contact.relationship.coding.display;
+        //        codingR.AppendChild(displayR);
 
-                #endregion
+        //        XmlNode userSelectedR = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
+        //        XmlAttribute userSelectedRValue = xml.CreateAttribute("value");
+        //        userSelectedR.Attributes.Append(userSelectedRValue);
+        //        userSelectedRValue.Value = patient.contact.relationship.coding.userSelected.ToString();
+        //        codingR.AppendChild(userSelectedR);
+        //        #endregion
 
-                #region Create NAME TAG
-                XmlNode nameC = xml.CreateNode(XmlNodeType.Element, "name", "");
-                contact.AppendChild(nameC);
+        //        XmlNode textR = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textRValue = xml.CreateAttribute("value");
+        //        textR.Attributes.Append(textRValue);
+        //        textRValue.Value = patient.contact.relationship.text;
+        //        relationship.AppendChild(textR);
 
-                #region Create NAME(HUMAN NAME) TAG
+        //        #endregion
 
-                XmlNode useC = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useCValue = xml.CreateAttribute("value");
-                useC.Attributes.Append(useCValue);
-                useCValue.Value = patient.contact.name.use;
-                nameC.AppendChild(useC);
+        //        #region Create NAME TAG
+        //        XmlNode nameC = xml.CreateNode(XmlNodeType.Element, "name", "");
+        //        contact.AppendChild(nameC);
 
-                XmlNode textC = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textCValue = xml.CreateAttribute("value");
-                textC.Attributes.Append(textCValue);
-                textCValue.Value = patient.contact.name.text;
-                nameC.AppendChild(textC);
+        //        #region Create NAME(HUMAN NAME) TAG
 
-                XmlNode familyC = xml.CreateNode(XmlNodeType.Element, "family", "");
-                XmlAttribute familyCValue = xml.CreateAttribute("value");
-                familyC.Attributes.Append(familyCValue);
-                familyCValue.Value = patient.contact.name.family;
-                nameC.AppendChild(familyC);
+        //        XmlNode useC = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useCValue = xml.CreateAttribute("value");
+        //        useC.Attributes.Append(useCValue);
+        //        useCValue.Value = patient.contact.name.use;
+        //        nameC.AppendChild(useC);
 
-                XmlNode givenC = xml.CreateNode(XmlNodeType.Element, "given", "");
-                XmlAttribute givenCValue = xml.CreateAttribute("value");
-                givenC.Attributes.Append(givenCValue);
-                givenCValue.Value = patient.contact.name.given;
-                nameC.AppendChild(givenC);
+        //        XmlNode textC = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textCValue = xml.CreateAttribute("value");
+        //        textC.Attributes.Append(textCValue);
+        //        textCValue.Value = patient.contact.name.text;
+        //        nameC.AppendChild(textC);
 
-                XmlNode prefixC = xml.CreateNode(XmlNodeType.Element, "prefix", "");
-                XmlAttribute prefixCValue = xml.CreateAttribute("value");
-                prefixC.Attributes.Append(prefixCValue);
-                prefixCValue.Value = patient.contact.name.prefix;
-                nameC.AppendChild(prefixC);
+        //        XmlNode familyC = xml.CreateNode(XmlNodeType.Element, "family", "");
+        //        XmlAttribute familyCValue = xml.CreateAttribute("value");
+        //        familyC.Attributes.Append(familyCValue);
+        //        familyCValue.Value = patient.contact.name.family;
+        //        nameC.AppendChild(familyC);
 
-                XmlNode suffixC = xml.CreateNode(XmlNodeType.Element, "suffix", "");
-                XmlAttribute suffixCValue = xml.CreateAttribute("value");
-                suffixC.Attributes.Append(suffixCValue);
-                suffixCValue.Value = patient.contact.name.suffix;
-                nameC.AppendChild(suffixC);
+        //        XmlNode givenC = xml.CreateNode(XmlNodeType.Element, "given", "");
+        //        XmlAttribute givenCValue = xml.CreateAttribute("value");
+        //        givenC.Attributes.Append(givenCValue);
+        //        givenCValue.Value = patient.contact.name.given;
+        //        nameC.AppendChild(givenC);
 
-                #region Create PERIOD TAG
-                XmlNode periodC = xml.CreateNode(XmlNodeType.Element, "period", "");
-                nameC.AppendChild(periodC);
+        //        XmlNode prefixC = xml.CreateNode(XmlNodeType.Element, "prefix", "");
+        //        XmlAttribute prefixCValue = xml.CreateAttribute("value");
+        //        prefixC.Attributes.Append(prefixCValue);
+        //        prefixCValue.Value = patient.contact.name.prefix;
+        //        nameC.AppendChild(prefixC);
 
-                #region Create PERIOD childs TAG
+        //        XmlNode suffixC = xml.CreateNode(XmlNodeType.Element, "suffix", "");
+        //        XmlAttribute suffixCValue = xml.CreateAttribute("value");
+        //        suffixC.Attributes.Append(suffixCValue);
+        //        suffixCValue.Value = patient.contact.name.suffix;
+        //        nameC.AppendChild(suffixC);
 
-                XmlNode startC = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startCValue = xml.CreateAttribute("value");
-                startC.Attributes.Append(startCValue);
-                startCValue.Value = patient.contact.period.Start.ToString();
-                periodC.AppendChild(startC);
+        //        #region Create PERIOD TAG
+        //        XmlNode periodC = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        nameC.AppendChild(periodC);
 
-                XmlNode endC = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endCalue = xml.CreateAttribute("value");
-                endC.Attributes.Append(endCalue);
-                endCalue.Value = patient.contact.period.End.ToString();
-                periodC.AppendChild(endC);
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode startC = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startCValue = xml.CreateAttribute("value");
+        //        startC.Attributes.Append(startCValue);
+        //        startCValue.Value = patient.contact.period.Start.ToString();
+        //        periodC.AppendChild(startC);
 
-                #endregion
+        //        XmlNode endC = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endCalue = xml.CreateAttribute("value");
+        //        endC.Attributes.Append(endCalue);
+        //        endCalue.Value = patient.contact.period.End.ToString();
+        //        periodC.AppendChild(endC);
 
+        //        #endregion
 
-                #endregion
+        //        #endregion
 
-                #endregion
 
-                #region Create TELECOM TAG
+        //        #endregion
 
-                XmlNode telecomC = xml.CreateNode(XmlNodeType.Element, "telecom", "");
-                contact.AppendChild(telecomC);
+        //        #endregion
 
-                #region Create TELECOM(CONTACT POINT) childs TAG
+        //        #region Create TELECOM TAG
 
-                XmlNode systemC = xml.CreateNode(XmlNodeType.Element, "system", "");
-                XmlAttribute systemCValue = xml.CreateAttribute("value");
-                systemC.Attributes.Append(systemCValue);
-                systemCValue.Value = patient.contact.telecom.system;
-                telecomC.AppendChild(systemC);
+        //        XmlNode telecomC = xml.CreateNode(XmlNodeType.Element, "telecom", "");
+        //        contact.AppendChild(telecomC);
 
-                XmlNode valueC = xml.CreateNode(XmlNodeType.Element, "value", "");
-                XmlAttribute valueCValue = xml.CreateAttribute("value");
-                valueC.Attributes.Append(valueCValue);
-                valueCValue.Value = patient.contact.telecom.value;
-                telecomC.AppendChild(valueC);
+        //        #region Create TELECOM(CONTACT POINT) childs TAG
 
-                XmlNode useCon = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useConValue = xml.CreateAttribute("value");
-                useCon.Attributes.Append(useConValue);
-                useConValue.Value = patient.contact.telecom.value;
-                telecomC.AppendChild(useCon);
+        //        XmlNode systemC = xml.CreateNode(XmlNodeType.Element, "system", "");
+        //        XmlAttribute systemCValue = xml.CreateAttribute("value");
+        //        systemC.Attributes.Append(systemCValue);
+        //        systemCValue.Value = patient.contact.telecom.system;
+        //        telecomC.AppendChild(systemC);
 
-                XmlNode rankC = xml.CreateNode(XmlNodeType.Element, "rank", "");
-                XmlAttribute rankCValue = xml.CreateAttribute("value");
-                rankC.Attributes.Append(rankCValue);
-                rankCValue.Value = patient.contact.telecom.rank.ToString();
-                telecomC.AppendChild(rankC);
+        //        XmlNode valueC = xml.CreateNode(XmlNodeType.Element, "value", "");
+        //        XmlAttribute valueCValue = xml.CreateAttribute("value");
+        //        valueC.Attributes.Append(valueCValue);
+        //        valueCValue.Value = patient.contact.telecom.value;
+        //        telecomC.AppendChild(valueC);
 
-                #region Create PERIOD TAG
+        //        XmlNode useCon = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useConValue = xml.CreateAttribute("value");
+        //        useCon.Attributes.Append(useConValue);
+        //        useConValue.Value = patient.contact.telecom.value;
+        //        telecomC.AppendChild(useCon);
 
-                XmlNode periodCon = xml.CreateNode(XmlNodeType.Element, "period", "");
-                telecomC.AppendChild(periodT);
+        //        XmlNode rankC = xml.CreateNode(XmlNodeType.Element, "rank", "");
+        //        XmlAttribute rankCValue = xml.CreateAttribute("value");
+        //        rankC.Attributes.Append(rankCValue);
+        //        rankCValue.Value = patient.contact.telecom.rank.ToString();
+        //        telecomC.AppendChild(rankC);
 
-                #region Create PERIOD childs TAG
+        //        #region Create PERIOD TAG
 
-                XmlNode startCon = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startConValue = xml.CreateAttribute("value");
-                startCon.Attributes.Append(startConValue);
-                startConValue.Value = patient.contact.telecom.period.Start.ToString();
-                periodCon.AppendChild(startCon);
+        //        XmlNode periodCon = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        telecomC.AppendChild(periodT);
 
-                XmlNode endCon = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endConValue = xml.CreateAttribute("value");
-                endCon.Attributes.Append(endConValue);
-                endConValue.Value = patient.contact.telecom.period.End.ToString();
-                periodCon.AppendChild(endCon);
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode startCon = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startConValue = xml.CreateAttribute("value");
+        //        startCon.Attributes.Append(startConValue);
+        //        startConValue.Value = patient.contact.telecom.period.Start.ToString();
+        //        periodCon.AppendChild(startCon);
 
-                #endregion
+        //        XmlNode endCon = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endConValue = xml.CreateAttribute("value");
+        //        endCon.Attributes.Append(endConValue);
+        //        endConValue.Value = patient.contact.telecom.period.End.ToString();
+        //        periodCon.AppendChild(endCon);
 
-                #endregion
+        //        #endregion
 
+        //        #endregion
 
-                #endregion
+        //        #endregion
 
-                #region Create ADDRESS TAG
 
-                XmlNode addressC = xml.CreateNode(XmlNodeType.Element, "address", "");
-                contact.AppendChild(addressC);
+        //        #endregion
 
-                #region Create ADDRESS childs TAG
+        //        #region Create ADDRESS TAG
 
-                XmlNode useContact = xml.CreateNode(XmlNodeType.Element, "use", "");
-                XmlAttribute useContactValue = xml.CreateAttribute("value");
-                useContact.Attributes.Append(useContactValue);
-                useContactValue.Value = patient.contact.address.Use;
-                addressC.AppendChild(useContact);
+        //        XmlNode addressC = xml.CreateNode(XmlNodeType.Element, "address", "");
+        //        contact.AppendChild(addressC);
 
-                XmlNode typeContact = xml.CreateNode(XmlNodeType.Element, "type", "");
-                XmlAttribute typeContactValue = xml.CreateAttribute("value");
-                typeContact.Attributes.Append(typeContactValue);
-                typeContactValue.Value = patient.contact.address.Type;
-                addressC.AppendChild(typeContact);
+        //        #region Create ADDRESS childs TAG
 
-                XmlNode textContact = xml.CreateNode(XmlNodeType.Element, "text", "");
-                XmlAttribute textContactValue = xml.CreateAttribute("value");
-                textContact.Attributes.Append(textContactValue);
-                textContactValue.Value = patient.contact.address.Text;
-                addressC.AppendChild(textContact);
+        //        XmlNode useContact = xml.CreateNode(XmlNodeType.Element, "use", "");
+        //        XmlAttribute useContactValue = xml.CreateAttribute("value");
+        //        useContact.Attributes.Append(useContactValue);
+        //        useContactValue.Value = patient.contact.address.Use;
+        //        addressC.AppendChild(useContact);
 
-                XmlNode lineContact = xml.CreateNode(XmlNodeType.Element, "line", "");
-                XmlAttribute lineContactValue = xml.CreateAttribute("value");
-                lineContact.Attributes.Append(lineContactValue);
-                lineContactValue.Value = patient.contact.address.Line;
-                addressC.AppendChild(lineContact);
+        //        XmlNode typeContact = xml.CreateNode(XmlNodeType.Element, "type", "");
+        //        XmlAttribute typeContactValue = xml.CreateAttribute("value");
+        //        typeContact.Attributes.Append(typeContactValue);
+        //        typeContactValue.Value = patient.contact.address.Type;
+        //        addressC.AppendChild(typeContact);
 
-                XmlNode cityContact = xml.CreateNode(XmlNodeType.Element, "city", "");
-                XmlAttribute cityContactValue = xml.CreateAttribute("value");
-                cityContact.Attributes.Append(cityContactValue);
-                cityContactValue.Value = patient.contact.address.City;
-                addressC.AppendChild(cityContact);
+        //        XmlNode textContact = xml.CreateNode(XmlNodeType.Element, "text", "");
+        //        XmlAttribute textContactValue = xml.CreateAttribute("value");
+        //        textContact.Attributes.Append(textContactValue);
+        //        textContactValue.Value = patient.contact.address.Text;
+        //        addressC.AppendChild(textContact);
 
-                XmlNode districtContact = xml.CreateNode(XmlNodeType.Element, "district", "");
-                XmlAttribute districtContactValue = xml.CreateAttribute("value");
-                districtContact.Attributes.Append(districtContactValue);
-                districtContactValue.Value = patient.contact.address.District;
-                addressC.AppendChild(districtContact);
+        //        XmlNode lineContact = xml.CreateNode(XmlNodeType.Element, "line", "");
+        //        XmlAttribute lineContactValue = xml.CreateAttribute("value");
+        //        lineContact.Attributes.Append(lineContactValue);
+        //        lineContactValue.Value = patient.contact.address.Line;
+        //        addressC.AppendChild(lineContact);
 
-                XmlNode stateContact = xml.CreateNode(XmlNodeType.Element, "state", "");
-                XmlAttribute stateContactValue = xml.CreateAttribute("value");
-                stateContact.Attributes.Append(stateContactValue);
-                stateContactValue.Value = patient.contact.address.State;
-                addressC.AppendChild(stateContact);
+        //        XmlNode cityContact = xml.CreateNode(XmlNodeType.Element, "city", "");
+        //        XmlAttribute cityContactValue = xml.CreateAttribute("value");
+        //        cityContact.Attributes.Append(cityContactValue);
+        //        cityContactValue.Value = patient.contact.address.City;
+        //        addressC.AppendChild(cityContact);
 
-                XmlNode postalCodeContact = xml.CreateNode(XmlNodeType.Element, "postalCode", "");
-                XmlAttribute postalCodeContactValue = xml.CreateAttribute("value");
-                postalCodeContact.Attributes.Append(postalCodeContactValue);
-                postalCodeContactValue.Value = patient.contact.address.PostalCode;
-                addressC.AppendChild(postalCodeContact);
+        //        XmlNode districtContact = xml.CreateNode(XmlNodeType.Element, "district", "");
+        //        XmlAttribute districtContactValue = xml.CreateAttribute("value");
+        //        districtContact.Attributes.Append(districtContactValue);
+        //        districtContactValue.Value = patient.contact.address.District;
+        //        addressC.AppendChild(districtContact);
 
-                XmlNode countryContanct = xml.CreateNode(XmlNodeType.Element, "country", "");
-                XmlAttribute countryContanctValue = xml.CreateAttribute("value");
-                countryContanct.Attributes.Append(countryContanctValue);
-                countryContanctValue.Value = patient.contact.address.Country;
-                addressC.AppendChild(countryContanct);
+        //        XmlNode stateContact = xml.CreateNode(XmlNodeType.Element, "state", "");
+        //        XmlAttribute stateContactValue = xml.CreateAttribute("value");
+        //        stateContact.Attributes.Append(stateContactValue);
+        //        stateContactValue.Value = patient.contact.address.State;
+        //        addressC.AppendChild(stateContact);
 
-                #region Create PERIOD TAG
+        //        XmlNode postalCodeContact = xml.CreateNode(XmlNodeType.Element, "postalCode", "");
+        //        XmlAttribute postalCodeContactValue = xml.CreateAttribute("value");
+        //        postalCodeContact.Attributes.Append(postalCodeContactValue);
+        //        postalCodeContactValue.Value = patient.contact.address.PostalCode;
+        //        addressC.AppendChild(postalCodeContact);
 
-                XmlNode periodContact = xml.CreateNode(XmlNodeType.Element, "period", "");
-                addressC.AppendChild(periodContact);
+        //        XmlNode countryContanct = xml.CreateNode(XmlNodeType.Element, "country", "");
+        //        XmlAttribute countryContanctValue = xml.CreateAttribute("value");
+        //        countryContanct.Attributes.Append(countryContanctValue);
+        //        countryContanctValue.Value = patient.contact.address.Country;
+        //        addressC.AppendChild(countryContanct);
 
-                #region Create PERIOD childs TAG
+        //        #region Create PERIOD TAG
 
-                XmlNode startA = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startAValue = xml.CreateAttribute("value");
-                startT.Attributes.Append(startAValue);
-                startTValue.Value = patient.address.Period.Start.ToString();
-                periodContact.AppendChild(startA);
+        //        XmlNode periodContact = xml.CreateNode(XmlNodeType.Element, "period", "");
+        //        addressC.AppendChild(periodContact);
 
-                XmlNode endA = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endAValue = xml.CreateAttribute("value");
-                endA.Attributes.Append(endAValue);
-                endAValue.Value = patient.address.Period.End.ToString();
-                periodContact.AppendChild(endA);
+        //        #region Create PERIOD childs TAG
 
-                #endregion
+        //        XmlNode startA = xml.CreateNode(XmlNodeType.Element, "start", "");
+        //        XmlAttribute startAValue = xml.CreateAttribute("value");
+        //        startT.Attributes.Append(startAValue);
+        //        startTValue.Value = patient.address.Period.Start.ToString();
+        //        periodContact.AppendChild(startA);
 
-                #endregion
+        //        XmlNode endA = xml.CreateNode(XmlNodeType.Element, "end", "");
+        //        XmlAttribute endAValue = xml.CreateAttribute("value");
+        //        endA.Attributes.Append(endAValue);
+        //        endAValue.Value = patient.address.Period.End.ToString();
+        //        periodContact.AppendChild(endA);
 
+        //        #endregion
 
-                #endregion
+        //        #endregion
 
-                #endregion
 
-                #endregion
+        //        #endregion
 
-                xml.Save("Patient_" + patient.identifier.value + ".xml");
-                Console.WriteLine("XML scris cu succes!");
-            }
+        //        #endregion
 
-            
-        }
+        //        #endregion
+
+        //        xml.Save("Patient_" + patient.identifier.value + ".xml");
+        //        Console.WriteLine("XML scris cu succes!");
+        //    }
+
+
+        //}
+
+
+        static List<string> listaValues = new List<string>();
         static void Main(string[] args)
         {
-            Coding coding = new Coding("system", "version", "code", "display", true);
-            CodeableConcept codableconcept = new CodeableConcept(coding, "text");
-            Period period = new Period(DateTime.Now, DateTime.Now);
-            Identifier identifier = new Identifier("use", codableconcept, "system", "value1", period, "assigner");
-            Identifier identifier2 = new Identifier("use", codableconcept, "system", "value2", period, "assigner");
-            HumanName humanname = new HumanName("use", "text", "family", "given", "prefix", "suffix", period);
-            ContactPoint contactpoint = new ContactPoint("system", "value", "use", 2, period);
-            Address address = new Address("use", "type", "text", "line", "city", "district", "state", "postalCode", "country", period);
-            Attachement attachement = new Attachement("contentType", "language", "daa".ToCharArray(), "url", 2, "da".ToCharArray(), "title", DateTime.Now);
-            Contact contact = new Contact(codableconcept, humanname, contactpoint, address, "masculin", "organization", period);
-            Communication communication = new Communication(codableconcept, true);
-            Link link = new Link("other", "type");
+            Coding coding = new Coding(1,"system", "version", "code", "display", true);
+            CodeableConcept codableconcept = new CodeableConcept(1, coding, "text");
+            Period period = new Period(1, DateTime.Now, DateTime.Now);
+            Identifier identifier = new Identifier(1, "use", codableconcept, "system", "value1", period, "assigner");
+            Identifier identifier2 = new Identifier(1, "use", codableconcept, "system", "value2", period, "assigner");
+            HumanName humanname = new HumanName(1, "use", "text", "family", "given", "prefix", "suffix", period);
+            ContactPoint contactpoint = new ContactPoint(1, "system", "value", "use", 2, period);
+            Address address = new Address(1, "use", "type", "text", "line", "city", "district", "state", "postalCode", "country", period);
+            Attachement attachement = new Attachement(1, "contentType", "language", "daa".ToCharArray(), "url", 2, "da".ToCharArray(), "title", DateTime.Now);
+            Contact contact = new Contact(1, codableconcept, humanname, contactpoint, address, "masculin", "organization", period);
+            Communication communication = new Communication(1, codableconcept, true);
+            Link link = new Link(1, "other", "type");
             Patient patient = new Patient(1,identifier, true, humanname, contactpoint, "masculin", DateTime.Now, "viu", address, codableconcept, 2, attachement,contact,communication, "generalPractitioner", "managingOrganization", link );
             Patient patient2 = new Patient(2,identifier2, true, humanname, contactpoint, "feminin", DateTime.Now, "viu", address, codableconcept, 2, attachement, contact, communication, "generalPractitioner", "managingOrganization", link);
 
@@ -805,9 +809,60 @@ namespace XMLGenerator
             patientsList.Add(patient);
             patientsList.Add(patient2);
 
-            createXml(patientsList);
+            //createXml(patientsList);
 
 
+            var xmlFile = Path.Combine(Directory.GetCurrentDirectory(), "file_output");
+            var xmlName = "Patient_value1.xml";
+            xmlFile = Path.Combine(xmlFile, xmlName);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFile);
+            XmlNode rootNode = doc.DocumentElement;
+            DisplayNodes(rootNode);
+
+            
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            foreach (var item in listaValues)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        public static void DisplayNodes(XmlNode node)
+        {
+           
+            //Print the node type, node name and node value of the node
+            if (node.NodeType == XmlNodeType.Text)
+            {
+                Console.WriteLine("Type = [" + node.NodeType + "] Value = " + node.Value);
+                //listaValues.Add(node.Value.ToString());
+            }
+            else
+            {
+                Console.WriteLine("Type = [" + node.NodeType + "] Name = " + node.Name);
+            }
+
+            //Print attributes of the node
+            if (node.Attributes != null)
+            {
+                XmlAttributeCollection attrs = node.Attributes;
+                foreach (XmlAttribute attr in attrs)
+                {
+                    Console.WriteLine("Attribute Name = " + attr.Name + "; Attribute Value = " + attr.Value);
+                    listaValues.Add(attr.Value.ToString());
+                }
+            }
+
+
+           
+
+            //Print individual children of the node, gets only direct children of the node
+            XmlNodeList children = node.ChildNodes;
+            foreach (XmlNode child in children)
+            {
+                DisplayNodes(child);
+            }
         }
     }
 }

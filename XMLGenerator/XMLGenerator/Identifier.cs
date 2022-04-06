@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record Identifier(string use, CodeableConcept type, string system, string value, Period period, string assigner);
+    public record Identifier(int id, string use, CodeableConcept type, string system, string value, Period period, string assigner);
 }

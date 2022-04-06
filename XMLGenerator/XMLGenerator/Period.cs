@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record Period(DateTime Start, DateTime End);
+    public record Period(int id, DateTime Start, DateTime End);
 }

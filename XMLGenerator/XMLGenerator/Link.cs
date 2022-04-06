@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record Link(string other, string type);
+    public record Link(int id, string other, string type);
 }

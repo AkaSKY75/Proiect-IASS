@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace XMLGenerator
 {
-    public record HumanName(string use, string text, string family, string given, string prefix, string suffix, Period period);
+    public record HumanName(int id, string use, string text, string family, string given, string prefix, string suffix, Period period);
 
 }

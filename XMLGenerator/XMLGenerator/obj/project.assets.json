@@ -8,23 +8,25 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Andrei Criste\\.nuget\\packages\\": {},
-    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\An IV\\SemII\\IASS\\XML\\XMLGenerator\\XMLGenerator\\XMLGenerator.csproj",
+      "projectUniqueName": "E:\\Anul 4\\SEM II\\IASS\\xml_generator\\xml_generator\\XMLGenerator\\XMLGenerator\\XMLGenerator.csproj",
       "projectName": "XMLGenerator",
-      "projectPath": "D:\\An IV\\SemII\\IASS\\XML\\XMLGenerator\\XMLGenerator\\XMLGenerator.csproj",
-      "packagesPath": "C:\\Users\\Andrei Criste\\.nuget\\packages\\",
-      "outputPath": "D:\\An IV\\SemII\\IASS\\XML\\XMLGenerator\\XMLGenerator\\obj\\",
+      "projectPath": "E:\\Anul 4\\SEM II\\IASS\\xml_generator\\xml_generator\\XMLGenerator\\XMLGenerator\\XMLGenerator.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "E:\\Anul 4\\SEM II\\IASS\\xml_generator\\xml_generator\\XMLGenerator\\XMLGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Andrei Criste\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -65,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
