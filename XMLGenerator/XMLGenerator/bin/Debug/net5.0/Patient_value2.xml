@@ -15,10 +15,10 @@
     <system value="system" />
     <value value="value2" />
     <period>
-      <start value="4/6/2022 8:54:23 PM" />
-      <end value="4/6/2022 8:54:23 PM" />
+      <start value="4/6/2022 9:39:48 PM" />
+      <end value="4/6/2022 9:39:48 PM" />
     </period>
-    <assigner />
+    <assigner>assigner</assigner>
   </identifier>
   <active value="True" />
   <name>
@@ -29,8 +29,8 @@
     <prefix value="prefix" />
     <suffix value="suffix" />
     <period>
-      <start value="4/6/2022 8:54:23 PM" />
-      <end value="4/6/2022 8:54:23 PM" />
+      <start value="4/6/2022 9:39:48 PM" />
+      <end value="4/6/2022 9:39:48 PM" />
     </period>
   </name>
   <telecom>
@@ -40,7 +40,7 @@
     <rank value="2" />
   </telecom>
   <gender value="feminin" />
-  <birthDate value="4/6/2022 8:54:23 PM" />
+  <birthDate value="4/6/2022 9:39:48 PM" />
   <deceased value="viu" />
   <address>
     <use value="use" />
@@ -53,8 +53,8 @@
     <postalCode value="postalCode" />
     <country value="country" />
     <period>
-      <start />
-      <end value="4/6/2022 8:54:23 PM" />
+      <start value="4/6/2022 9:39:48 PM" />
+      <end value="4/6/2022 9:39:48 PM" />
     </period>
   </address>
   <maritalStatus>
@@ -76,7 +76,7 @@
     <size value="2" />
     <hash value="da" />
     <title value="title" />
-    <creation value="4/6/2022 8:54:23 PM" />
+    <creation value="4/6/2022 9:39:48 PM" />
   </photo>
   <contact>
     <relationship>
@@ -97,8 +97,8 @@
       <prefix value="prefix" />
       <suffix value="suffix" />
       <period>
-        <start value="4/6/2022 8:54:23 PM" />
-        <end value="4/6/2022 8:54:23 PM" />
+        <start value="4/6/2022 9:39:48 PM" />
+        <end value="4/6/2022 9:39:48 PM" />
       </period>
     </name>
     <telecom>
@@ -107,9 +107,49 @@
       <use value="value" />
       <rank value="2" />
       <period>
-        <start value="" />
-        <end value="4/6/2022 8:54:23 PM" />
+        <start value="4/6/2022 9:39:48 PM" />
+        <end value="4/6/2022 9:39:48 PM" />
       </period>
     </telecom>
+    <address>
+      <use value="use" />
+      <type value="type" />
+      <text value="text" />
+      <line value="line" />
+      <city value="city" />
+      <district value="district" />
+      <state value="state" />
+      <postalCode value="postalCode" />
+      <country value="country" />
+      <period>
+        <start value="4/6/2022 9:39:48 PM" />
+        <end value="4/6/2022 9:39:48 PM" />
+      </period>
+    </address>
+    <gender value="masculin" />
+    <organization value="organization" />
+    <period>
+      <start value="4/6/2022 9:39:48 PM" />
+      <end value="4/6/2022 9:39:48 PM" />
+    </period>
   </contact>
+  <communication>
+    <language>
+      <coding>
+        <system value="system" />
+        <version value="version" />
+        <code value="code" />
+        <display value="display" />
+        <userSelected value="True" />
+      </coding>
+      <text value="text" />
+    </language>
+    <preferred value="True" />
+  </communication>
+  <generalPractitioner>generalPractitioner</generalPractitioner>
+  <managingOrganization>managingOrganization</managingOrganization>
+  <link>
+    <other value="other" />
+    <other value="type" />
+  </link>
 </Patient>

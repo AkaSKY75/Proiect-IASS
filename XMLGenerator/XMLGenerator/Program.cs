@@ -18,7 +18,7 @@ namespace XMLGenerator
                 XmlNode root = xml.CreateNode(XmlNodeType.Element, "Patient", "");
                 xml.AppendChild(root);
 
-                #region Create identifier TAG
+                #region Create IDENTIFIER TAG
 
                 XmlNode identifier = xml.CreateNode(XmlNodeType.Element, "identifier", "");
                 root.AppendChild(identifier);
@@ -129,6 +129,7 @@ namespace XMLGenerator
                 #region Create ASSIGNER TAG
 
                 XmlNode assigner = xml.CreateNode(XmlNodeType.Element, "assigner", "");
+                assigner.InnerText = patient.identifier.assigner;
                 identifier.AppendChild(assigner);
 
                 #endregion
@@ -137,11 +138,17 @@ namespace XMLGenerator
 
                 #endregion
 
+                #region Create ACTIVE TAG
+
                 XmlNode active = xml.CreateNode(XmlNodeType.Element, "active", "");
                 XmlAttribute activeValue = xml.CreateAttribute("value");
                 activeValue.Value = patient.active.ToString();
                 active.Attributes.Append(activeValue);
                 root.AppendChild(active);
+
+                #endregion
+
+                #region Create NAME TAG
 
                 XmlNode name = xml.CreateNode(XmlNodeType.Element, "name", "");
                 root.AppendChild(name);
@@ -206,6 +213,8 @@ namespace XMLGenerator
 
                 #endregion
 
+
+                #endregion
 
                 #endregion
 
@@ -367,8 +376,8 @@ namespace XMLGenerator
 
                 XmlNode startA = xml.CreateNode(XmlNodeType.Element, "start", "");
                 XmlAttribute startAValue = xml.CreateAttribute("value");
-                startT.Attributes.Append(startAValue);
-                startTValue.Value = patient.address.Period.Start.ToString();
+                startA.Attributes.Append(startAValue);
+                startAValue.Value = patient.address.Period.Start.ToString();
                 periodA.AppendChild(startA);
 
                 XmlNode endA = xml.CreateNode(XmlNodeType.Element, "end", "");
@@ -755,34 +764,172 @@ namespace XMLGenerator
 
                 #region Create PERIOD childs TAG
 
-                XmlNode startA = xml.CreateNode(XmlNodeType.Element, "start", "");
-                XmlAttribute startAValue = xml.CreateAttribute("value");
-                startT.Attributes.Append(startAValue);
-                startTValue.Value = patient.address.Period.Start.ToString();
-                periodContact.AppendChild(startA);
+                XmlNode startContact = xml.CreateNode(XmlNodeType.Element, "start", "");
+                XmlAttribute startContactValue = xml.CreateAttribute("value");
+                startContact.Attributes.Append(startContactValue);
+                startContactValue.Value = patient.contact.address.Period.Start.ToString();
+                periodContact.AppendChild(startContact);
 
-                XmlNode endA = xml.CreateNode(XmlNodeType.Element, "end", "");
-                XmlAttribute endAValue = xml.CreateAttribute("value");
-                endA.Attributes.Append(endAValue);
-                endAValue.Value = patient.address.Period.End.ToString();
-                periodContact.AppendChild(endA);
+                XmlNode endContact = xml.CreateNode(XmlNodeType.Element, "end", "");
+                XmlAttribute endContactValue = xml.CreateAttribute("value");
+                endContact.Attributes.Append(endContactValue);
+                endContactValue.Value = patient.contact.address.Period.End.ToString();
+                periodContact.AppendChild(endContact);
+
+                #endregion
+
+                #endregion
+
 
                 #endregion
 
                 #endregion
 
+                #region Create GENDER TAG
+
+                XmlNode genderContact = xml.CreateNode(XmlNodeType.Element, "gender", "");
+                XmlAttribute genderContactValue = xml.CreateAttribute("value");
+                genderContactValue.Value = patient.contact.gender;
+                genderContact.Attributes.Append(genderContactValue);
+                contact.AppendChild(genderContact);
+
+                #endregion
+
+                #region Create ORGANIZATION TAG
+
+                XmlNode organizationContact = xml.CreateNode(XmlNodeType.Element, "organization", "");
+                XmlAttribute organizationContactValue = xml.CreateAttribute("value");
+                organizationContactValue.Value = patient.contact.organization;
+                organizationContact.Attributes.Append(organizationContactValue);
+                contact.AppendChild(organizationContact);
+
+                #endregion
+
+                #region Create PERIOD TAG
+                XmlNode periodContactC = xml.CreateNode(XmlNodeType.Element, "period", "");
+                contact.AppendChild(periodContactC);
+
+                #region Create PERIOD childs TAG
+
+                XmlNode startContactC = xml.CreateNode(XmlNodeType.Element, "start", "");
+                XmlAttribute startContactCValue = xml.CreateAttribute("value");
+                startContactC.Attributes.Append(startContactCValue);
+                startContactCValue.Value = patient.contact.period.Start.ToString();
+                periodContactC.AppendChild(startContactC);
+
+                XmlNode endContactC = xml.CreateNode(XmlNodeType.Element, "end", "");
+                XmlAttribute endContactCValue = xml.CreateAttribute("value");
+                endContactC.Attributes.Append(endContactCValue);
+                endContactCValue.Value = patient.contact.period.End.ToString();
+                periodContactC.AppendChild(endContactC);
 
                 #endregion
 
                 #endregion
+
+                #endregion
+
+                #region Create COMMUNICATION TAG
+
+                XmlNode communication = xml.CreateNode(XmlNodeType.Element, "communication", "");
+                root.AppendChild(communication);
+
+                XmlNode languageComm = xml.CreateNode(XmlNodeType.Element, "language", "");
+                communication.AppendChild(languageComm);
+
+                #region Create LANGUAGE(CodeableConcept) childs TAG
+
+                XmlNode codingL = xml.CreateNode(XmlNodeType.Element, "coding", "");
+                languageComm.AppendChild(codingL);
+
+                #region Create Coding(Coding) childs TAG
+
+                XmlNode systemL = xml.CreateNode(XmlNodeType.Element, "system", "");
+                XmlAttribute systemLValue = xml.CreateAttribute("value");
+                systemL.Attributes.Append(systemLValue);
+                systemLValue.Value = patient.communication.language.coding.system;
+                codingL.AppendChild(systemL);
+
+                XmlNode versionL = xml.CreateNode(XmlNodeType.Element, "version", "");
+                XmlAttribute versionLValue = xml.CreateAttribute("value");
+                versionL.Attributes.Append(versionLValue);
+                versionLValue.Value = patient.communication.language.coding.version;
+                codingL.AppendChild(versionL);
+
+                XmlNode codeL = xml.CreateNode(XmlNodeType.Element, "code", "");
+                XmlAttribute codeLValue = xml.CreateAttribute("value");
+                codeL.Attributes.Append(codeLValue);
+                codeLValue.Value = patient.communication.language.coding.code;
+                codingL.AppendChild(codeL);
+
+                XmlNode displayL = xml.CreateNode(XmlNodeType.Element, "display", "");
+                XmlAttribute displayLValue = xml.CreateAttribute("value");
+                displayL.Attributes.Append(displayLValue);
+                displayLValue.Value = patient.communication.language.coding.display;
+                codingL.AppendChild(displayL);
+
+                XmlNode userSelectedL = xml.CreateNode(XmlNodeType.Element, "userSelected", "");
+                XmlAttribute userSelectedLValue = xml.CreateAttribute("value");
+                userSelectedL.Attributes.Append(userSelectedLValue);
+                userSelectedLValue.Value = patient.communication.language.coding.userSelected.ToString();
+                codingL.AppendChild(userSelectedL);
+
+                #endregion
+
+                XmlNode textL = xml.CreateNode(XmlNodeType.Element, "text", "");
+                XmlAttribute textLValue = xml.CreateAttribute("value");
+                textL.Attributes.Append(textLValue);
+                textLValue.Value = patient.communication.language.text;
+                languageComm.AppendChild(textL);
+
+                #endregion
+
+                XmlNode preferred = xml.CreateNode(XmlNodeType.Element, "preferred", "");
+                XmlAttribute preferredValue = xml.CreateAttribute("value");
+                preferred.Attributes.Append(preferredValue);
+                preferredValue.Value = patient.communication.preferred.ToString();
+                communication.AppendChild(preferred);
+
+                #endregion
+
+                #region Create GENERALPRACTITIONER TAG
+
+                XmlNode generalPractitioner = xml.CreateNode(XmlNodeType.Element, "generalPractitioner", "");
+                generalPractitioner.InnerText = patient.generalPractitioner;
+                root.AppendChild(generalPractitioner);
+
+                #endregion
+
+                #region Create MANAGINGORGANIZATION TAG
+
+                XmlNode managingOrganization = xml.CreateNode(XmlNodeType.Element, "managingOrganization", "");
+                managingOrganization.InnerText = patient.managingOrganization;
+                root.AppendChild(managingOrganization);
+
+                #endregion
+
+                #region Create LINK TAG
+
+                XmlNode link = xml.CreateNode(XmlNodeType.Element, "link", "");
+                root.AppendChild(link);
+
+                XmlNode other = xml.CreateNode(XmlNodeType.Element, "other", "");
+                XmlAttribute otherValue = xml.CreateAttribute("value");
+                other.Attributes.Append(otherValue);
+                otherValue.Value = patient.link.other;
+                link.AppendChild(other);
+
+                XmlNode typeL = xml.CreateNode(XmlNodeType.Element, "other", "");
+                XmlAttribute typeLValue = xml.CreateAttribute("value");
+                typeL.Attributes.Append(typeLValue);
+                typeLValue.Value = patient.link.type;
+                link.AppendChild(typeL);
 
                 #endregion
 
                 xml.Save("Patient_" + patient.identifier.value + ".xml");
                 Console.WriteLine("XML scris cu succes!");
-            }
-
-            
+            }   
         }
         static void Main(string[] args)
         {
