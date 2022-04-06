@@ -14,11 +14,18 @@ namespace Proiect
     public partial class WebForm1 : System.Web.UI.Page
     {
         SHA256 sha;
-        SqlConnection con = new SqlConnection("Data Source=WINCTRL-PLKDE1R;Initial Catalog=IASS;Integrated Security=True");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-BDLB83I;Initial Catalog=IASS;Integrated Security=True");
         SqlCommand cmd;
         SqlDataReader dr;
         protected void Page_Load(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("Id 2 = " + Session["Id"]);
+
+            if (Session["Id"] != null)
+            {
+                Anonymous_User.Visible = false;
+                Logged_User.Visible = true;
+            }
             //string[] utilizatori = File.ReadAllLines(Server.MapPath("~/Fisiere/") + "utilizatori.txt");
             //foreach(var line in utilizatori)
             //{
@@ -31,91 +38,97 @@ namespace Proiect
         {
             sha = SHA256.Create();
             byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(TextBoxPWD.Text.Trim()));
-            string base64 = "";
+            string base16 = "";
             for(var i = 0; i < hash.Length; i++)
             {
                 switch((hash[i] >> 4) & 0x0F)
                 {
-                    case 0: base64 += "0";
+                    case 0: base16 += "0";
                             break;
-                    case 1: base64 += "1";
+                    case 1: base16 += "1";
                             break;
-                    case 2: base64 += "2";
+                    case 2: base16 += "2";
                             break;
-                    case 3: base64 += "3";
+                    case 3: base16 += "3";
                             break;
-                    case 4: base64 += "4";
+                    case 4: base16 += "4";
                             break;
-                    case 5: base64 += "5";
+                    case 5: base16 += "5";
                             break;
-                    case 6: base64 += "6";
+                    case 6: base16 += "6";
                             break;
-                    case 7: base64 += "7";
+                    case 7: base16 += "7";
                             break;
-                    case 8: base64 += "8";
+                    case 8: base16 += "8";
                             break;
-                    case 9: base64 += "9";
+                    case 9: base16 += "9";
                             break;
-                    case 10:base64 += "A";
+                    case 10:base16 += "A";
                             break;
-                    case 11:base64 += "B";
+                    case 11:base16 += "B";
                             break;
-                    case 12:base64 += "C";
+                    case 12:base16 += "C";
                             break;
-                    case 13:base64 += "D";
+                    case 13:base16 += "D";
                             break;
-                    case 14:base64 += "E";
+                    case 14:base16 += "E";
                             break;
-                    case 15:base64 += "F";
+                    case 15:base16 += "F";
                             break;
                 }
                 switch (hash[i] & 0x0F)
                 {
-                    case 0: base64 += "0";
+                    case 0: base16 += "0";
                             break;
-                    case 1: base64 += "1";
+                    case 1: base16 += "1";
                             break;
-                    case 2: base64 += "2";
+                    case 2: base16 += "2";
                             break;
-                    case 3: base64 += "3";
+                    case 3: base16 += "3";
                             break;
-                    case 4: base64 += "4";
+                    case 4: base16 += "4";
                             break;
-                    case 5: base64 += "5";
+                    case 5: base16 += "5";
                             break;
-                    case 6: base64 += "6";
+                    case 6: base16 += "6";
                             break;
-                    case 7: base64 += "7";
+                    case 7: base16 += "7";
                             break;
-                    case 8: base64 += "8";
+                    case 8: base16 += "8";
                             break;
-                    case 9: base64 += "9";
+                    case 9: base16 += "9";
                             break;
-                    case 10:base64 += "A";
+                    case 10:base16 += "A";
                             break;
-                    case 11:base64 += "B";
+                    case 11:base16 += "B";
                             break;
-                    case 12:base64 += "C";
+                    case 12:base16 += "C";
                             break;
-                    case 13:base64 += "D";
+                    case 13:base16 += "D";
                             break;
-                    case 14:base64 += "E";
+                    case 14:base16 += "E";
                             break;
-                    case 15:base64 += "F";
+                    case 15:base16 += "F";
                             break;
                 }
             }
             try
             {
                 con.Open();
-                cmd = new SqlCommand("select * from Users WHERE Utilizator='"+TextBoxUSR.Text.Trim()+"' AND Parola='"+base64+"'", con);
+                cmd = new SqlCommand("select * from Users WHERE Username='"+TextBoxUSR.Text.Trim()+"' AND Password='"+base16+"'", con);
                 dr = cmd.ExecuteReader();
                 if(!dr.HasRows)
                 {
                     string script = "var div = document.createElement(\"div\");div.id=\"popup\";div.style.width=\"100%\";div.style.height=\"100%\";div.style.position=\"absolute\";div.style.zIndex=\"1\";div.style.top=\"0\";div.style.left=\"0\";div.style.backgroundColor=\"rgba(0, 0, 0, 0.85)\";div.onclick=function(){this.remove()};document.querySelector('body').appendChild(div);div = document.createElement('div');div.style.backgroundColor=\"#E9ECEF\";div.style.width=\"50%\";div.style.borderRadius=\"25px\";div.style.position=\"absolute\"; div.innerHTML=\"<h1 style='text-align:center;'>Eroare!</h1><h2>Numele sau parola incorecte! Verificați datele introduse și reîncercați.</h2>\";document.getElementById('popup').appendChild(div);div.style.top=(document.querySelector('body').offsetHeight-div.offsetHeight)/2+\"px\";div.style.left=(document.querySelector('body').offsetWidth-div.offsetWidth)/2+\"px\";div.style.padding=\"0 5% 0 5%\";";
                     ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
-
                 }
+                else
+                {
+                    dr.Read();
+                    Session["Id"] = dr[0];
+                    Response.Redirect("WebForm1.aspx");
+                }
+
             }
             catch (Exception ex)
             {

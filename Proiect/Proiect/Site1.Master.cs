@@ -14,5 +14,20 @@ namespace Proiect
         {
 
         }
+
+        protected void About_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Despre.aspx");
+        }
+
+        protected void Contact_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Despre.aspx");
+        }
+
+        protected void Home_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebForm1.aspx");
+        }
     }
 }

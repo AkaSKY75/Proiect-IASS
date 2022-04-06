@@ -16,12 +16,13 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    <form id="form1" runat="server">
     <header id="header">
         <nav id="nav">
             <ul>
-                <li><a href="WebForm1.aspx">Acasa</a></li>
-                <li><a href="#">Despre</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><asp:Button ID="Home_Button" runat="server" OnClick="Home_Click" Text="Acasa" /></li>
+                <li><asp:Button ID="About_Button" runat="server" OnClick="About_Click" Text="Despre" /></li>
+                <li><asp:Button ID="Contact_Button" runat="server" OnClick="Contact_Click" Text="Contact" /></li>
             </ul>
         </nav>
     </header>
@@ -34,10 +35,12 @@
     <footer id="footer">
         Dan Mircea-Aurelian, Diaconescu Dragoș, Dobrescu Andrei, Căpraru Emil, Criste Andrei, Căprariu Emanuel - Proiect la IASS
     </footer>
+    </form>
 </body>
 <script>
     function resize() {
         document.getElementById('con').style.height = document.querySelector('body').offsetHeight - document.querySelector('header').offsetHeight - document.querySelector('footer').offsetHeight + "px";
+        console.log("hello from resize");
     }
 
     window.onload = resize;
