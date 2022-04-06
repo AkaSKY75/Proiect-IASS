@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patient>
+  <identifier>
+    <use value="use" />
+    <type>
+      <coding>
+        <system value="system" />
+        <version value="version" />
+        <code value="code" />
+        <display value="display" />
+        <userSelected value="True" />
+      </coding>
+      <text value="text" />
+    </type>
+    <system value="system" />
+    <value value="value2" />
+    <period>
+      <start value="4/6/2022 8:54:23 PM" />
+      <end value="4/6/2022 8:54:23 PM" />
+    </period>
+    <assigner />
+  </identifier>
+  <active value="True" />
+  <name>
+    <use value="use" />
+    <text value="text" />
+    <family value="family" />
+    <given value="given" />
+    <prefix value="prefix" />
+    <suffix value="suffix" />
+    <period>
+      <start value="4/6/2022 8:54:23 PM" />
+      <end value="4/6/2022 8:54:23 PM" />
+    </period>
+  </name>
+  <telecom>
+    <system value="system" />
+    <value value="value" />
+    <use value="use" />
+    <rank value="2" />
+  </telecom>
+  <gender value="feminin" />
+  <birthDate value="4/6/2022 8:54:23 PM" />
+  <deceased value="viu" />
+  <address>
+    <use value="use" />
+    <type value="type" />
+    <text value="text" />
+    <line value="line" />
+    <city value="city" />
+    <district value="district" />
+    <state value="state" />
+    <postalCode value="postalCode" />
+    <country value="country" />
+    <period>
+      <start />
+      <end value="4/6/2022 8:54:23 PM" />
+    </period>
+  </address>
+  <maritalStatus>
+    <coding>
+      <system value="system" />
+      <version value="version" />
+      <code value="code" />
+      <display value="display" />
+      <userSelected value="True" />
+    </coding>
+    <text value="text" />
+  </maritalStatus>
+  <multipleBirth value="2" />
+  <photo>
+    <contentType value="contentType" />
+    <language value="language" />
+    <data value="daa" />
+    <url value="url" />
+    <size value="2" />
+    <hash value="da" />
+    <title value="title" />
+    <creation value="4/6/2022 8:54:23 PM" />
+  </photo>
+  <contact>
+    <relationship>
+      <coding>
+        <system value="system" />
+        <version value="version" />
+        <code value="code" />
+        <display value="display" />
+        <userSelected value="True" />
+      </coding>
+      <text value="text" />
+    </relationship>
+    <name>
+      <use value="use" />
+      <text value="text" />
+      <family value="family" />
+      <given value="given" />
+      <prefix value="prefix" />
+      <suffix value="suffix" />
+      <period>
+        <start value="4/6/2022 8:54:23 PM" />
+        <end value="4/6/2022 8:54:23 PM" />
+      </period>
+    </name>
+    <telecom>
+      <system value="system" />
+      <value value="value" />
+      <use value="value" />
+      <rank value="2" />
+      <period>
+        <start value="" />
+        <end value="4/6/2022 8:54:23 PM" />
+      </period>
+    </telecom>
+  </contact>
+</Patient>
