@@ -14,3 +14,19 @@ D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.
 D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\ref\XMLGenerator.dll
 D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.pdb
 D:\An IV\SemII\IASS\XML\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.genruntimeconfig.cache
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.exe
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.deps.json
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.runtimeconfig.json
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.runtimeconfig.dev.json
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.dll
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\ref\XMLGenerator.dll
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\bin\Debug\net5.0\XMLGenerator.pdb
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.csproj.AssemblyReference.cache
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.GeneratedMSBuildEditorConfig.editorconfig
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.AssemblyInfoInputs.cache
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.AssemblyInfo.cs
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.csproj.CoreCompileInputs.cache
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.dll
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\ref\XMLGenerator.dll
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.pdb
+F:\Faculta\IASS\XMLGenerator\XMLGenerator\obj\Debug\net5.0\XMLGenerator.genruntimeconfig.cache

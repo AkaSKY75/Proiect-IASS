@@ -7,10 +7,77 @@ namespace XMLGenerator
 {
     class Program
     {
+        public static List<Patient> readXml()
+        {
+            List<Patient> patientList = new List<Patient>();
+
+            string[] files = System.IO.Directory.GetFiles("./", "*.xml");
+
+            XmlDocument xmlSursa = new XmlDocument();
+
+
+            foreach (string file in files)
+            {
+                xmlSursa.Load(file);
+                XmlNode patientNode = xmlSursa.SelectSingleNode("//Patient");
+                XmlNode identifierNode = xmlSursa.SelectSingleNode("//Patient//identifier");
+                XmlNode identifierCodeableConceptNode = xmlSursa.SelectSingleNode("//Patient//identifier//type");
+                XmlNode identifierCodeableConceptCodingNode = xmlSursa.SelectSingleNode("//Patient//identifier//type//coding");
+                XmlNode identifierPeriodNode = xmlSursa.SelectSingleNode("//Patient//identifier//period");
+                XmlNode humanNameNode = xmlSursa.SelectSingleNode("//Patient//name");
+                XmlNode humanNamePeriodNode = xmlSursa.SelectSingleNode("//Patient//name//period");
+                XmlNode contactPointNode = xmlSursa.SelectSingleNode("//Patient//telecom");
+                XmlNode adressNode = xmlSursa.SelectSingleNode("//Patient//address");
+                XmlNode adressPeriodNode = xmlSursa.SelectSingleNode("//Patient//address//period");
+                XmlNode codeableConceptNode = xmlSursa.SelectSingleNode("//Patient//maritalStatus");
+                XmlNode codeableConceptCodingNode = xmlSursa.SelectSingleNode("//Patient//maritalStatus//coding");
+                XmlNode attachmentNode = xmlSursa.SelectSingleNode("//Patient//photo");
+                XmlNode contactNode = xmlSursa.SelectSingleNode("//Patient//contact");
+                XmlNode contactCodeableConceptNode = xmlSursa.SelectSingleNode("//Patient//contact//relationship");
+                XmlNode contactCodeableConceptCodingNode = xmlSursa.SelectSingleNode("//Patient//contact//relationship//coding");
+                XmlNode contactHumanNameNode = xmlSursa.SelectSingleNode("//Patient//contact//name");
+                XmlNode contactHumanNamePeriodNode = xmlSursa.SelectSingleNode("//Patient//contact//name//period");
+                XmlNode contactContactPointNode = xmlSursa.SelectSingleNode("//Patient//contact//telecom");
+                XmlNode contactContactPointPeriodNode = xmlSursa.SelectSingleNode("//Patient//contact//telecom//period");
+                XmlNode contactAddressNode = xmlSursa.SelectSingleNode("//Patient//contact//address");
+                XmlNode contactAddressPeriodNode = xmlSursa.SelectSingleNode("//Patient//contact//address//period");
+                XmlNode contactPeriodNode = xmlSursa.SelectSingleNode("//Patient//contact//period");
+                XmlNode communicationNode = xmlSursa.SelectSingleNode("//Patient//communication");
+                XmlNode communicationLanguageNode = xmlSursa.SelectSingleNode("//Patient//communication//language");
+                XmlNode linkNode = xmlSursa.SelectSingleNode("//Patient//link");
+
+
+                /*Coding coding = new Coding();
+                CodeableConcept codableconcept = new CodeableConcept();
+                Period period = new Period(DateTime.Now, DateTime.Now);
+                Identifier identifier = new Identifier();
+                Identifier identifier2 = new Identifier();
+                HumanName humanname = new HumanName();
+                ContactPoint contactpoint = new ContactPoint();
+                Address address = new Address();
+                Attachement attachement = new Attachement();
+                Contact contact = new Contact();
+                Communication communication = new Communication();
+                Link link = new Link();*/
+
+                foreach (XmlNode node in identifierNode.ChildNodes)
+                {
+                    Console.WriteLine(node.Name);
+                }
+
+            }
+            return patientList;
+
+        }
+
         public static void createXml(List<Patient> patientsList)
         {
             foreach(Patient patient in patientsList)
             {
+
+
+
+
                 // Create XML Document and the root for it
                 XmlDocument xml = new XmlDocument();
                 XmlDeclaration xml_declaration = xml.CreateXmlDeclaration("1.0", "utf-8", "");
@@ -952,8 +1019,9 @@ namespace XMLGenerator
             patientsList.Add(patient);
             patientsList.Add(patient2);
 
-            createXml(patientsList);
+            //createXml(patientsList);
 
+            patientsList = readXml();
 
         }
     }
